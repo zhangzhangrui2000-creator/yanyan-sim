@@ -13,7 +13,6 @@
   border: 2px solid;
   border-color: #ffffff #808080 #808080 #ffffff;
   box-shadow: 2px 2px 0 #000000;
-  max-width: 100%;
 }
 
 /* 标题栏 */
@@ -329,6 +328,10 @@
 
 /* 移动端优化 */
 @media (max-width: 640px) {
+  .win95-window {
+    max-width: 100%;
+  }
+
   .win95-desktop {
     padding-bottom: calc(36px + env(safe-area-inset-bottom));
   }
