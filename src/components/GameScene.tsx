@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Win95Window } from './Win95Window';
 import { Win95Button } from './Win95Button';
+import { RestartButton } from './RestartButton';
 import { AttributeBar } from './AttributeBar';
 import { TypewriterText } from './TypewriterText';
 import { useGameStore } from '@/store/gameStore';
@@ -14,7 +15,6 @@ export const GameScene: React.FC = () => {
     attributes, 
     progress, 
     makeChoice, 
-    resetGame,
     getAttributeLabel,
     character,
   } = useGameStore();
@@ -397,9 +397,7 @@ export const GameScene: React.FC = () => {
       <Win95Window title="错误" icon="⚠️">
         <div className="p-4 text-center">
           <p className="text-red-600 mb-4">场景加载失败</p>
-          <Win95Button onClick={resetGame} emoji="🔄">
-            重新开始
-          </Win95Button>
+          <RestartButton />
         </div>
       </Win95Window>
     );
@@ -488,23 +486,38 @@ export const GameScene: React.FC = () => {
                   className="space-y-3"
                 >
                   {currentScene.choices.map((choice, index) => (
-                    <motion.button
-                      key={choice.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                      onClick={() => handleChoice(choice)}
-                      className="win95-btn w-full text-left p-3 sm:p-4 flex items-start gap-3"
-                    >
-                      <span className="text-xl flex-shrink-0">
-                        {choice.emoji || '💭'}
-                      </span>
-                      <span className="text-xs sm:text-sm leading-relaxed">
-                        {choice.text}
-                      </span>
-                    </motion.button>
+                    choice.id === 'restart' ? (
+                      <motion.div
+                        key={choice.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <RestartButton
+                          label={choice.text}
+                          emoji={choice.emoji || '🔄'}
+                          className="w-full text-left p-3 sm:p-4 flex items-start gap-3"
+                        />
+                      </motion.div>
+                    ) : (
+                      <motion.button
+                        key={choice.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        onClick={() => handleChoice(choice)}
+                        className="win95-btn w-full text-left p-3 sm:p-4 flex items-start gap-3"
+                      >
+                        <span className="text-xl flex-shrink-0">
+                          {choice.emoji || '💭'}
+                        </span>
+                        <span className="text-xs sm:text-sm leading-relaxed">
+                          {choice.text}
+                        </span>
+                      </motion.button>
+                    )
                   ))}
                 </motion.div>
               )}
