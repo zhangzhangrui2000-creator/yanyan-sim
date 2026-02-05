@@ -40,7 +40,7 @@ export interface Scene {
   background?: string;
   choices: Choice[];
   isEnd?: boolean;
-  endingType?: 'graduation' | 'dropout' | 'delay' | 'excellent';
+  endingType?: 'graduation' | 'dropout' | 'delay' | 'excellent' | 'withdrawal';
 }
 
 export interface GameState {

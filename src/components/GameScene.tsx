@@ -50,6 +50,8 @@ export const GameScene: React.FC = () => {
         return '延期毕业';
       case 'dropout':
         return '休学调整';
+      case 'withdrawal':
+        return '顺利肄业';
       default:
         return '读研旅程';
     }
@@ -65,6 +67,8 @@ export const GameScene: React.FC = () => {
         return '慢一点，也在前进';
       case 'dropout':
         return '照顾好自己，未来可期';
+      case 'withdrawal':
+        return '及时止损，换个剧本';
       default:
         return '每一步都算数';
     }
@@ -133,7 +137,9 @@ export const GameScene: React.FC = () => {
       ? '节奏调整：延毕后继续打磨，仍有机会翻盘'
       : endingType === 'dropout'
         ? '节奏调整：先照顾自己，未来依然有路可走'
-        : '节奏调整：按计划推进，目标达成感提升';
+        : endingType === 'withdrawal'
+          ? '节奏调整：换条赛道，人生依然精彩'
+          : '节奏调整：按计划推进，目标达成感提升';
 
     return [
       research(attributes.academic),
@@ -200,6 +206,17 @@ export const GameScene: React.FC = () => {
           text: '#dcfce7',
           subtext: 'rgba(220, 252, 231, 0.75)',
           qrDark: '#064e3b',
+          qrLight: '#ffffff',
+        };
+      case 'withdrawal':
+        return {
+          bgFrom: '#111827',
+          bgTo: '#4338ca',
+          accent: '#a78bfa',
+          panel: 'rgba(255, 255, 255, 0.12)',
+          text: '#e0e7ff',
+          subtext: 'rgba(224, 231, 255, 0.75)',
+          qrDark: '#1f2937',
           qrLight: '#ffffff',
         };
       default:
@@ -557,12 +574,14 @@ export const GameScene: React.FC = () => {
                   {currentScene.endingType === 'graduation' && '🎓'}
                   {currentScene.endingType === 'delay' && '⏰'}
                   {currentScene.endingType === 'dropout' && '💚'}
+                  {currentScene.endingType === 'withdrawal' && '🎒'}
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold mb-2">
                   {currentScene.endingType === 'excellent' && '优秀毕业！'}
                   {currentScene.endingType === 'graduation' && '顺利毕业！'}
                   {currentScene.endingType === 'delay' && '延期毕业'}
                   {currentScene.endingType === 'dropout' && '休学调整'}
+                  {currentScene.endingType === 'withdrawal' && '顺利肄业'}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-700">
                   {getEndingTagline(currentScene.endingType)}
