@@ -7,6 +7,7 @@ import { AttributeBar } from './AttributeBar';
 import { TypewriterText } from './TypewriterText';
 import { useGameStore } from '@/store/gameStore';
 import { scenes } from '@/data/scenes';
+import QRCode from 'qrcode';
 import { BACKGROUNDS, MAJORS, ADVISOR_TYPES } from '@/types/game';
 
 export const GameScene: React.FC = () => {
@@ -255,6 +256,32 @@ export const GameScene: React.FC = () => {
     ctx.closePath();
   };
 
+  const drawWrappedText = (
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    x: number,
+    y: number,
+    maxWidth: number,
+    lineHeight: number
+  ) => {
+    const words = text.split('');
+    let line = '';
+    let offsetY = 0;
+    words.forEach((char, index) => {
+      const testLine = line + char;
+      const metrics = ctx.measureText(testLine);
+      if (metrics.width > maxWidth && index > 0) {
+        ctx.fillText(line, x, y + offsetY);
+        line = char;
+        offsetY += lineHeight;
+      } else {
+        line = testLine;
+      }
+    });
+    if (line) ctx.fillText(line, x, y + offsetY);
+    return y + offsetY + lineHeight;
+  };
+
   const handleGenerateShareImage = async () => {
     if (!currentScene?.isEnd) return;
     setIsGeneratingShare(true);
@@ -275,48 +302,74 @@ export const GameScene: React.FC = () => {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      const cardX = 80;
-      const cardY = 420;
-      const cardW = 920;
-      const cardH = 300;
-      drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 26);
+      ctx.fillStyle = theme.text;
+      ctx.font = 'bold 64px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText('读研模拟器', 80, 150);
+
+      ctx.fillStyle = theme.accent;
+      ctx.font = 'bold 72px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText(getEndingLabel(currentScene.endingType), 80, 260);
+
+      ctx.fillStyle = theme.subtext;
+      ctx.font = '32px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText(getEndingTagline(currentScene.endingType), 80, 320);
+
       ctx.fillStyle = theme.panel;
-      ctx.fill();
-      ctx.lineWidth = 5;
-      ctx.strokeStyle = theme.accent;
-      ctx.stroke();
-
-      drawRoundedRect(ctx, cardX + 6, cardY + 6, cardW - 12, cardH - 12, 22);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-      ctx.stroke();
-
-      const avatarSize = 120;
-      const avatarX = cardX + 40;
-      const avatarY = cardY + 70;
-      drawRoundedRect(ctx, avatarX, avatarY, avatarSize, avatarSize, 16);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+      drawRoundedRect(ctx, 60, 360, 960, 340, 28);
       ctx.fill();
 
-      const avatarEmoji = character?.gender === 'male'
-        ? '👨'
-        : character?.gender === 'female'
-          ? '👩'
-          : '🙂';
-      ctx.font = '72px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(avatarEmoji, avatarX + avatarSize / 2, avatarY + avatarSize / 2 + 4);
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = theme.text;
+      ctx.font = 'bold 34px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText(character?.name ? `毕业生：${character.name}` : '毕业生：匿名同学', 100, 430);
+      ctx.font = '28px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText(getCharacterLabel(), 100, 485);
+      ctx.fillText(`读研进度：第 ${progress.semester} 学期 · 第 ${progress.week} 周`, 100, 535);
 
-      const textX = avatarX + avatarSize + 40;
+      ctx.fillStyle = theme.panel;
+      drawRoundedRect(ctx, 60, 740, 960, 520, 28);
+      ctx.fill();
+
       ctx.fillStyle = theme.text;
       ctx.font = 'bold 36px "Microsoft YaHei", "PingFang SC", sans-serif';
-      ctx.fillText(character?.name ? `毕业生：${character.name}` : '毕业生：匿名同学', textX, cardY + 90);
+      ctx.fillText('毕业收获', 100, 810);
+
+      ctx.font = '30px "Microsoft YaHei", "PingFang SC", sans-serif';
+      let textY = 870;
+      const achievements = buildAchievementList(currentScene.endingType);
+      achievements.forEach((item) => {
+        textY = drawWrappedText(ctx, `• ${item}`, 100, textY, 820, 46);
+      });
+
+      const shareUrl = window.location.origin;
+      const qrDataUrl = await QRCode.toDataURL(shareUrl, {
+        margin: 1,
+        width: 260,
+        color: { dark: theme.qrDark, light: theme.qrLight },
+      });
+      const qrImg = new Image();
+      qrImg.src = qrDataUrl;
+      await new Promise((resolve, reject) => {
+        qrImg.onload = () => resolve(true);
+        qrImg.onerror = reject;
+      });
+
+      ctx.fillStyle = theme.panel;
+      drawRoundedRect(ctx, 60, 1320, 960, 520, 28);
+      ctx.fill();
+
+      ctx.drawImage(qrImg, 720, 1470, 240, 240);
+      ctx.fillStyle = theme.text;
+      ctx.font = 'bold 32px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText('扫码进入', 100, 1470);
       ctx.font = '28px "Microsoft YaHei", "PingFang SC", sans-serif';
-      ctx.fillText(getCharacterLabel(), textX, cardY + 150);
-      ctx.fillText(`读研进度：第 ${progress.semester} 学期 · 第 ${progress.week} 周`, textX, cardY + 205);
+      drawWrappedText(ctx, '让朋友也来体验读研模拟器', 100, 1520, 520, 42);
+      ctx.fillStyle = theme.subtext;
+      ctx.font = '24px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText(shareUrl, 100, 1630);
+
+      ctx.fillStyle = theme.subtext;
+      ctx.font = '24px "Microsoft YaHei", "PingFang SC", sans-serif';
+      ctx.fillText('Generated by 读研模拟器', 100, 1820);
 
       const dataUrl = canvas.toDataURL('image/png');
       setShareImageUrl(dataUrl);
