@@ -603,7 +603,7 @@ export const GameScene: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="fixed bottom-12 sm:bottom-4 left-4 right-4 text-center"
+        className="fixed bottom-16 sm:bottom-4 left-4 right-4 text-center"
       >
         <p className="text-white text-xs opacity-70 drop-shadow-md">
           读研模拟器 v1.0 | 本游戏纯属虚构，如有雷同纯属巧合

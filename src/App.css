@@ -13,6 +13,7 @@
   border: 2px solid;
   border-color: #ffffff #808080 #808080 #ffffff;
   box-shadow: 2px 2px 0 #000000;
+  max-width: 100%;
 }
 
 /* 标题栏 */
@@ -318,6 +319,12 @@
 
 .win95-blink {
   animation: win95-blink 1s infinite;
+}
+
+/* 底部声明文本 */
+.win95-footnote {
+  padding-bottom: calc(36px + env(safe-area-inset-bottom));
+  pointer-events: none;
 }
 
 /* 移动端优化 */
