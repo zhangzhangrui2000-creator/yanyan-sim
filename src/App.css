@@ -7,6 +7,29 @@
   font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
 }
 
+/* 欢迎页背景（像素风） */
+.win95-welcome-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('/bg-dorm.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.82) saturate(1.05);
+  z-index: 0;
+}
+
+.win95-welcome-vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 75%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* 窗口样式 */
 .win95-window {
   background-color: #c0c0c0;

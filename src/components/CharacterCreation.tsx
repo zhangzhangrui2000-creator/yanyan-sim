@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Win95Window } from './Win95Window';
 import { Win95Button } from './Win95Button';
@@ -9,6 +9,7 @@ export const CharacterCreation: React.FC = () => {
   const createCharacter = useGameStore(state => state.createCharacter);
   
   const [step, setStep] = useState(1);
+  const hasSubmittedRef = useRef(false);
   const [character, setCharacter] = useState({
     name: '',
     gender: '' as 'male' | 'female' | '',
@@ -17,21 +18,29 @@ export const CharacterCreation: React.FC = () => {
     advisorType: '',
   });
 
+  const submitCharacter = useCallback(() => {
+    if (hasSubmittedRef.current) {
+      return;
+    }
+    hasSubmittedRef.current = true;
+    // 生成随机名字
+    const names = character.gender === 'male' 
+      ? ['小明', '伟强', '志远', '浩然', '子轩']
+      : ['小红', '婷婷', '雨萱', '思琪', '梦洁'];
+    const randomName = names[Math.floor(Math.random() * names.length)];
+    
+    createCharacter({
+      ...character,
+      name: randomName,
+      gender: character.gender as 'male' | 'female',
+    });
+  }, [character, createCharacter]);
+
   const handleNext = () => {
     if (step < 4) {
       setStep(step + 1);
     } else {
-      // 生成随机名字
-      const names = character.gender === 'male' 
-        ? ['小明', '伟强', '志远', '浩然', '子轩']
-        : ['小红', '婷婷', '雨萱', '思琪', '梦洁'];
-      const randomName = names[Math.floor(Math.random() * names.length)];
-      
-      createCharacter({
-        ...character,
-        name: randomName,
-        gender: character.gender as 'male' | 'female',
-      });
+      submitCharacter();
     }
   };
 
@@ -49,6 +58,31 @@ export const CharacterCreation: React.FC = () => {
         return false;
     }
   };
+
+  useEffect(() => {
+    if (step === 1 && character.gender) {
+      setStep(2);
+      return;
+    }
+    if (step === 2 && character.background) {
+      setStep(3);
+      return;
+    }
+    if (step === 3 && character.major) {
+      setStep(4);
+      return;
+    }
+    if (step === 4 && character.advisorType) {
+      submitCharacter();
+    }
+  }, [
+    step,
+    character.gender,
+    character.background,
+    character.major,
+    character.advisorType,
+    submitCharacter,
+  ]);
 
   const renderStep = () => {
     switch (step) {
@@ -161,7 +195,7 @@ export const CharacterCreation: React.FC = () => {
     <Win95Window 
       title="新生入学登记" 
       icon="📝"
-      className="w-full max-w-[92vw] sm:max-w-lg"
+      className="w-[92vw] max-w-none"
     >
       <div className="p-3 sm:p-4">
         <div className="mb-4">

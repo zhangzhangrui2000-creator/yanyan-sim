@@ -461,7 +461,7 @@ export const GameScene: React.FC = () => {
         <Win95Window
           title={currentScene.title}
           icon={currentScene.emoji || '📋'}
-          className={`w-full max-w-[96vw] sm:max-w-2xl ${isEnding ? 'mt-24 sm:mt-28' : 'mt-20 sm:mt-24'}`}
+          className={`w-[92vw] max-w-none ${isEnding ? 'mt-24 sm:mt-28' : 'mt-20 sm:mt-24'}`}
           showMenu={false}
         >
           <div className="p-4 sm:p-6">
