@@ -259,23 +259,26 @@ export const scenes: Record<string, Scene> = {
     background: 'bg-lab',
     choices: [
       {
-        id: 'tianlin_2019',
-        text: '2019年',
-        emoji: '✅',
-        effects: { academic: 2 },
-        nextScene: 'advisor_errands',
-      },
-      {
-        id: 'tianlin_2018',
-        text: '2018年',
-        emoji: '❌',
+        id: 'tianlin_2017',
+        text: '2017年',
         effects: { mental: -5 },
         nextScene: 'ending_withdrawal',
       },
       {
+        id: 'tianlin_2018',
+        text: '2018年',
+        effects: { mental: -5 },
+        nextScene: 'ending_withdrawal',
+      },
+      {
+        id: 'tianlin_2019',
+        text: '2019年',
+        effects: { academic: 2 },
+        nextScene: 'advisor_errands',
+      },
+      {
         id: 'tianlin_2020',
         text: '2020年',
-        emoji: '❌',
         effects: { mental: -5 },
         nextScene: 'ending_withdrawal',
       },
