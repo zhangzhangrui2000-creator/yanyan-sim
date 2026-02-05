@@ -238,6 +238,95 @@ export const GameScene: React.FC = () => {
     ctx.closePath();
   };
 
+  const drawAvatar = (
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    size: number
+  ) => {
+    const mental = attributes.mental;
+    const academic = attributes.academic;
+    const advisor = attributes.advisor;
+    const money = attributes.money;
+    const peer = attributes.peer_relations;
+
+    const skin =
+      mental >= 70 ? '#f7d7c4' : mental >= 40 ? '#f0c2a2' : '#e3a48b';
+    const hair =
+      academic >= 80 ? '#2f2a45' : academic >= 60 ? '#3b2f2f' : '#4b3a26';
+    const outfit =
+      academic >= 80 ? '#3b82f6' : academic >= 60 ? '#22c55e' : '#f97316';
+    const badge =
+      advisor >= 70 ? '#fbbf24' : advisor >= 40 ? '#a3a3a3' : '#8b5cf6';
+    const accent =
+      money >= 70 ? '#16a34a' : money >= 40 ? '#0ea5e9' : '#ef4444';
+
+    const head = size * 0.36;
+    const headX = x + size * 0.22;
+    const headY = y + size * 0.12;
+
+    ctx.save();
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+    ctx.beginPath();
+    ctx.ellipse(x + size * 0.5, y + size * 0.9, size * 0.32, size * 0.08, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = skin;
+    ctx.beginPath();
+    ctx.arc(headX + head, headY + head, head, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = hair;
+    ctx.beginPath();
+    ctx.arc(headX + head, headY + head * 0.85, head * 1.02, Math.PI, 0);
+    ctx.fill();
+
+    if (character?.gender !== 'male') {
+      ctx.beginPath();
+      ctx.arc(headX + head * 0.3, headY + head * 1.05, head * 0.35, Math.PI * 1.05, Math.PI * 1.9);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(headX + head * 1.7, headY + head * 1.05, head * 0.35, Math.PI * 1.05, Math.PI * 1.9);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = '#111827';
+    ctx.beginPath();
+    ctx.arc(headX + head * 0.65, headY + head * 0.95, head * 0.12, 0, Math.PI * 2);
+    ctx.arc(headX + head * 1.35, headY + head * 0.95, head * 0.12, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#111827';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(headX + head, headY + head * 1.2, head * 0.35, 0, Math.PI);
+    ctx.stroke();
+
+    ctx.fillStyle = outfit;
+    drawRoundedRect(ctx, x + size * 0.18, y + size * 0.48, size * 0.64, size * 0.38, 18);
+    ctx.fill();
+
+    ctx.fillStyle = accent;
+    drawRoundedRect(ctx, x + size * 0.26, y + size * 0.64, size * 0.48, size * 0.14, 12);
+    ctx.fill();
+
+    ctx.fillStyle = badge;
+    ctx.beginPath();
+    ctx.arc(x + size * 0.72, y + size * 0.55, size * 0.07, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (peer >= 70) {
+      ctx.strokeStyle = '#eab308';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(x + size * 0.32, y + size * 0.78);
+      ctx.lineTo(x + size * 0.42, y + size * 0.9);
+      ctx.lineTo(x + size * 0.58, y + size * 0.72);
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  };
+
   const handleGenerateShareImage = async () => {
     if (!currentScene?.isEnd) return;
     setIsGeneratingShare(true);
@@ -274,32 +363,18 @@ export const GameScene: React.FC = () => {
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
       ctx.stroke();
 
-      const avatarSize = 120;
-      const avatarX = cardX + 40;
-      const avatarY = cardY + 70;
-      drawRoundedRect(ctx, avatarX, avatarY, avatarSize, avatarSize, 16);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
-      ctx.fill();
-
-      const avatarEmoji = character?.gender === 'male'
-        ? '👨'
-        : character?.gender === 'female'
-          ? '👩'
-          : '🙂';
-      ctx.font = '72px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(avatarEmoji, avatarX + avatarSize / 2, avatarY + avatarSize / 2 + 4);
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
-
-      const textX = avatarX + avatarSize + 40;
+      const textX = cardX + 40;
       ctx.fillStyle = theme.text;
       ctx.font = 'bold 36px "Microsoft YaHei", "PingFang SC", sans-serif';
-      ctx.fillText(character?.name ? `毕业生：${character.name}` : '毕业生：匿名同学', textX, cardY + 90);
+      ctx.fillText(character?.name ? `毕业生：${character.name}` : '毕业生：匿名同学', textX, cardY + 130);
       ctx.font = '28px "Microsoft YaHei", "PingFang SC", sans-serif';
-      ctx.fillText(getCharacterLabel(), textX, cardY + 150);
-      ctx.fillText(`读研进度：第 ${progress.semester} 学期 · 第 ${progress.week} 周`, textX, cardY + 205);
+      ctx.fillText(getCharacterLabel(), textX, cardY + 190);
+      ctx.fillText(`读研进度：第 ${progress.semester} 学期 · 第 ${progress.week} 周`, textX, cardY + 245);
+
+      const avatarSize = 200;
+      const avatarX = cardX + cardW - avatarSize - 50;
+      const avatarY = cardY + 50;
+      drawAvatar(ctx, avatarX, avatarY, avatarSize);
 
       const dataUrl = canvas.toDataURL('image/png');
       setShareImageUrl(dataUrl);
