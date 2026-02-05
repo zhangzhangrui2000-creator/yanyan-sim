@@ -933,7 +933,7 @@ export const scenes: Record<string, Scene> = {
   ending_withdrawal: {
     id: 'ending_withdrawal',
     title: '顺利肄业',
-    description: '你对“天临元年”的回答引起了全组沉默。\n\n最终，你选择退出这段研究生旅程。\n\n有些故事戛然而止，但人生依然可以换个剧本继续。\n\n🎒 顺利肄业',
+    description: '你对“天临元年”的回答让现场短暂沉默。\n\n最终，你决定提前结束这段研究生旅程，把精力留给更适合自己的方向。\n\n肄业不是失败，而是选择。换条路，人生仍然可以写出新章节。\n\n🎒 顺利肄业',
     emoji: '🎒',
     background: 'bg-dorm',
     isEnd: true,
