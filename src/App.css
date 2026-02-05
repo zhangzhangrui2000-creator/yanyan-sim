@@ -1,0 +1,398 @@
+/* Windows 95 复古风格样式 */
+
+/* 桌面背景 */
+.win95-desktop {
+  background-color: #008080;
+  min-height: 100vh;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+}
+
+/* 窗口样式 */
+.win95-window {
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 2px 2px 0 #000000;
+}
+
+/* 标题栏 */
+.win95-titlebar {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  padding: 3px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.win95-titlebar-small {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  padding: 2px 4px;
+}
+
+/* 标题栏按钮 */
+.win95-titlebar-btn {
+  width: 16px;
+  height: 14px;
+  background-color: #c0c0c0;
+  border: 1px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #000000;
+  cursor: pointer;
+}
+
+.win95-titlebar-btn:hover:not(:disabled) {
+  background-color: #d4d0c8;
+}
+
+.win95-titlebar-btn:active:not(:disabled) {
+  border-color: #000000 #ffffff #ffffff #000000;
+}
+
+.win95-titlebar-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.win95-close-btn {
+  font-weight: bold;
+}
+
+/* 菜单栏 */
+.win95-menubar {
+  background-color: #c0c0c0;
+  padding: 2px 4px;
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #808080;
+}
+
+.win95-menu-item {
+  font-size: 12px;
+  color: #000000;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.win95-menu-item:hover {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+/* 内容区域 */
+.win95-content {
+  background-color: #c0c0c0;
+  padding: 8px;
+}
+
+/* 按钮样式 */
+.win95-btn {
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+}
+
+.win95-btn:hover:not(:disabled) {
+  background-color: #d4d0c8;
+}
+
+.win95-btn:active:not(:disabled) {
+  border-color: #808080 #ffffff #ffffff #808080;
+  transform: translateY(1px);
+}
+
+.win95-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #808080;
+}
+
+.win95-btn-primary {
+  font-weight: bold;
+}
+
+.win95-btn-active {
+  border-color: #808080 #ffffff #ffffff #808080;
+  background-color: #d4d0c8;
+}
+
+/* 进度条 */
+.win95-progress-bg {
+  background-color: #808080;
+  border: 1px solid;
+  border-color: #404040 #ffffff #ffffff #404040;
+  height: 16px;
+  overflow: hidden;
+}
+
+.win95-progress-fill {
+  height: 100%;
+  transition: width 0.5s ease-out;
+}
+
+/* 任务栏 */
+.win95-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  z-index: 1000;
+}
+
+.win95-start-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background-color: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.win95-start-btn:hover {
+  background-color: #d4d0c8;
+}
+
+.win95-start-btn:active {
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.win95-taskbar-divider {
+  width: 2px;
+  height: 22px;
+  background-color: #808080;
+  border-left: 1px solid #ffffff;
+  margin: 0 4px;
+}
+
+.win95-taskbar-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background-color: #d4d0c8;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.win95-taskbar-item.active {
+  border-color: #404040 #d4d0c8 #d4d0c8 #404040;
+  background-color: #c0c0c0;
+}
+
+.win95-taskbar-time {
+  margin-left: auto;
+  padding: 2px 8px;
+  background-color: #c0c0c0;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  font-size: 12px;
+}
+
+/* 渐变文字 */
+.win95-gradient-text {
+  background: linear-gradient(180deg, #000080 0%, #1084d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #d4d0c8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+}
+
+::-webkit-scrollbar-button {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  height: 16px;
+  width: 16px;
+}
+
+/* 选择框样式 */
+::selection {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+/* 输入框样式 */
+.win95-input {
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 4px 8px;
+  font-size: 12px;
+  outline: none;
+}
+
+/* 通关海报预览 */
+.share-preview {
+  background-color: #d4d0c8;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 8px;
+}
+
+.share-preview img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  display: block;
+}
+
+.win95-input:focus {
+  border-color: #000080;
+}
+
+/* 文本区域样式 */
+.win95-textarea {
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 4px 8px;
+  font-size: 12px;
+  outline: none;
+  resize: none;
+}
+
+/* 分组框样式 */
+.win95-groupbox {
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+.win95-groupbox-title {
+  background-color: #c0c0c0;
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  top: -14px;
+  display: inline-block;
+}
+
+/* 动画效果 */
+@keyframes win95-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.win95-blink {
+  animation: win95-blink 1s infinite;
+}
+
+/* 移动端优化 */
+@media (max-width: 640px) {
+  .win95-desktop {
+    padding-bottom: calc(36px + env(safe-area-inset-bottom));
+  }
+
+  .win95-titlebar {
+    padding: 2px 3px;
+  }
+
+  .win95-titlebar-btn {
+    width: 18px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  .win95-menubar {
+    gap: 10px;
+  }
+
+  .win95-menu-item {
+    font-size: 11px;
+  }
+
+  .win95-content {
+    padding: 6px;
+  }
+
+  .win95-taskbar {
+    height: calc(36px + env(safe-area-inset-bottom));
+    padding: 4px 4px env(safe-area-inset-bottom);
+  }
+
+  .win95-start-btn {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  .win95-taskbar-item {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .win95-taskbar-time {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .win95-progress-bg {
+    height: 14px;
+  }
+
+  .share-preview img {
+    max-height: 260px;
+  }
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .win95-desktop {
+    font-size: 14px;
+  }
+  
+  .win95-taskbar {
+    height: 36px;
+  }
+  
+  .win95-start-btn {
+    padding: 4px 8px;
+  }
+  
+  .win95-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
