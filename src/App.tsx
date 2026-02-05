@@ -8,7 +8,7 @@ import { Win95Button } from '@/components/Win95Button';
 import './App.css';
 
 function App() {
-  const { isCharacterCreated, returnToWelcome, resetGame } = useGameStore();
+  const { isCharacterCreated, resetGame } = useGameStore();
   const [showCreation, setShowCreation] = React.useState(false);
 
   React.useEffect(() => {
@@ -101,7 +101,7 @@ function App() {
       <div className="win95-taskbar">
         <button
           className="win95-start-btn"
-          onClick={isCharacterCreated ? resetGame : returnToWelcome}
+          onClick={resetGame}
         >
           <span className="text-lg">🪟</span>
           <span className="font-bold">开始</span>
