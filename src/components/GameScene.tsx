@@ -638,7 +638,7 @@ export const GameScene: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <span className="text-sm">⚙️</span>
                   <span className="text-sm font-bold">
-                    {mode === 'torture' ? '折磨版' : '标准版'}
+                    折磨版
                   </span>
                 </div>
                 

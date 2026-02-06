@@ -51,7 +51,7 @@ export const useGameStore = create<GameState>()(
       isPlaying: false,
       isCharacterCreated: false,
       history: [],
-      mode: 'normal',
+      mode: 'torture',
       seed: null,
       backlashQueue: [],
       chainRemaining: 0,
