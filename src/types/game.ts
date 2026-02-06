@@ -2,13 +2,17 @@
 
 export interface Attributes {
   academic: number;      // 学术能力
-  mental: number;        // 心理健康
+  mental: number;        // 精神值
   advisor: number;       // 导师关系
-  money: number;         // 经济状况
+  money: number;         // 金钱
   peer_relations: number; // 同门关系
-  pressure: number;      // 绩效压力
+  pressure: number;      // 压力值
   advisor_mood: number;  // 导师情绪
   sleep_debt: number;    // 睡眠负债
+  health: number;        // 健康值
+  karma: number;         // 业力
+  rumor: number;         // 谣言值
+  kpi: number;           // KPI
 }
 
 export interface Character {
@@ -25,6 +29,13 @@ export interface Progress {
   day: number;         // 总天数
   scene: string;       // 当前场景ID
   kpiWarnings: number; // 绩效预警次数
+  eventCounter: number; // 事件计数器
+}
+
+export interface BacklashEvent {
+  steps: number;       // 剩余步数
+  severity: number;    // 反噬强度
+  chain: number;       // 连锁次数
 }
 
 export interface Choice {
@@ -44,7 +55,7 @@ export interface Scene {
   background?: string;
   choices: Choice[];
   isEnd?: boolean;
-  endingType?: 'graduation' | 'dropout' | 'delay' | 'excellent' | 'withdrawal' | 'burnout' | 'kicked';
+  endingType?: 'graduation' | 'dropout' | 'delay' | 'excellent' | 'withdrawal' | 'burnout' | 'kicked' | 'eternal' | 'kpi_fail' | 'fake' | 'health' | 'bankrupt';
 }
 
 export type GameMode = 'normal' | 'torture';
@@ -64,6 +75,10 @@ export interface GameState {
   isCharacterCreated: boolean;
   history: string[];  // 历史记录
   mode: GameMode;
+  seed: string | null;
+  backlashQueue: BacklashEvent[];
+  chainRemaining: number;
+  chainReturnScene: string | null;
   
   // 动作
   createCharacter: (character: Character) => void;

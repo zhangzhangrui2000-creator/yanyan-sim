@@ -18,6 +18,7 @@ export const GameScene: React.FC = () => {
     getAttributeLabel,
     character,
     mode,
+    backlashQueue,
   } = useGameStore();
 
   const [showChoices, setShowChoices] = useState(false);
@@ -27,6 +28,10 @@ export const GameScene: React.FC = () => {
 
   const currentScene = scenes[progress.scene];
   const isEnding = Boolean(currentScene?.isEnd);
+  const backlashCountdown =
+    mode === 'torture' && backlashQueue.length > 0
+      ? Math.min(...backlashQueue.map((item) => item.steps))
+      : null;
 
   useEffect(() => {
     setShowChoices(false);
@@ -58,6 +63,16 @@ export const GameScene: React.FC = () => {
         return '绩效清退';
       case 'withdrawal':
         return '顺利肄业';
+      case 'eternal':
+        return '永延毕';
+      case 'kpi_fail':
+        return 'KPI肄业';
+      case 'fake':
+        return '伪毕业';
+      case 'health':
+        return '健康崩溃';
+      case 'bankrupt':
+        return '破产退学';
       default:
         return '读研旅程';
     }
@@ -79,6 +94,16 @@ export const GameScene: React.FC = () => {
         return '指标未达标，被动出局';
       case 'withdrawal':
         return '及时止损，换个剧本';
+      case 'eternal':
+        return '像在原地踏步';
+      case 'kpi_fail':
+        return '指标倒扣，提前退场';
+      case 'fake':
+        return '看似毕业，实则断裂';
+      case 'health':
+        return '身体亮红灯';
+      case 'bankrupt':
+        return '现金断崖';
       default:
         return '每一步都算数';
     }
@@ -167,6 +192,16 @@ export const GameScene: React.FC = () => {
             ? '节奏调整：停下来，先修复自己'
             : endingType === 'kicked'
               ? '节奏调整：退场重整，未来仍可转圜'
+              : endingType === 'eternal'
+                ? '节奏调整：进度被卡死，需要重新寻找突破'
+                : endingType === 'kpi_fail'
+                  ? '节奏调整：指标失衡，路径被迫终止'
+                  : endingType === 'fake'
+                    ? '节奏调整：名义毕业，但现实仍有代价'
+                    : endingType === 'health'
+                      ? '节奏调整：身体先行，其他都要让步'
+                      : endingType === 'bankrupt'
+                        ? '节奏调整：资金断裂，被迫停学'
               : '节奏调整：按计划推进，目标达成感提升';
 
     return [
@@ -257,6 +292,61 @@ export const GameScene: React.FC = () => {
           panel: 'rgba(255, 255, 255, 0.1)',
           text: '#fef2f2',
           subtext: 'rgba(254, 242, 242, 0.75)',
+          qrDark: '#111827',
+          qrLight: '#ffffff',
+        };
+      case 'eternal':
+        return {
+          bgFrom: '#0f172a',
+          bgTo: '#312e81',
+          accent: '#eab308',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#f8fafc',
+          subtext: 'rgba(248, 250, 252, 0.75)',
+          qrDark: '#0f172a',
+          qrLight: '#ffffff',
+        };
+      case 'kpi_fail':
+        return {
+          bgFrom: '#111827',
+          bgTo: '#334155',
+          accent: '#f97316',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#e2e8f0',
+          subtext: 'rgba(226, 232, 240, 0.75)',
+          qrDark: '#111827',
+          qrLight: '#ffffff',
+        };
+      case 'fake':
+        return {
+          bgFrom: '#0b1220',
+          bgTo: '#1e293b',
+          accent: '#fb7185',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#f8fafc',
+          subtext: 'rgba(248, 250, 252, 0.75)',
+          qrDark: '#111827',
+          qrLight: '#ffffff',
+        };
+      case 'health':
+        return {
+          bgFrom: '#0f172a',
+          bgTo: '#065f46',
+          accent: '#22c55e',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#dcfce7',
+          subtext: 'rgba(220, 252, 231, 0.75)',
+          qrDark: '#064e3b',
+          qrLight: '#ffffff',
+        };
+      case 'bankrupt':
+        return {
+          bgFrom: '#111827',
+          bgTo: '#3f3f46',
+          accent: '#f59e0b',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#f8fafc',
+          subtext: 'rgba(248, 250, 252, 0.75)',
           qrDark: '#111827',
           qrLight: '#ffffff',
         };
@@ -459,8 +549,37 @@ export const GameScene: React.FC = () => {
       pressure: '📉',
       advisor_mood: '😶‍🌫️',
       sleep_debt: '🛌',
+      health: '🩺',
+      karma: '🧿',
+      rumor: '🗯️',
+      kpi: '📊',
     };
     return emojis[key] || '';
+  };
+
+  const getAttributeMeta = (key: string) => {
+    switch (key) {
+      case 'mental':
+        return { min: 0, max: 150 };
+      case 'pressure':
+        return { min: 0, max: 200, dangerHigh: true };
+      case 'sleep_debt':
+        return { min: 0, max: 150, dangerHigh: true };
+      case 'advisor_mood':
+        return { min: 0, max: 100 };
+      case 'health':
+        return { min: 0, max: 100 };
+      case 'money':
+        return { min: 0, max: 10000, display: (v: number) => Math.round(v) };
+      case 'kpi':
+        return { min: -10, max: 20, display: (v: number) => Math.round(v) };
+      case 'karma':
+        return { min: 0, max: 20, dangerHigh: true };
+      case 'rumor':
+        return { min: 0, max: 10, dangerHigh: true };
+      default:
+        return { min: 0, max: 100 };
+    }
   };
 
   if (!currentScene) {
@@ -529,19 +648,34 @@ export const GameScene: React.FC = () => {
                 {/* 属性条 */}
                 <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
                   {Object.entries(attributes)
-                    .filter(([key]) =>
-                      mode === 'torture'
-                        ? true
-                        : key !== 'pressure' && key !== 'advisor_mood' && key !== 'sleep_debt'
-                    )
+                    .filter(([key]) => {
+                      if (mode === 'torture') return true;
+                      const normalKeys = new Set([
+                        'academic',
+                        'mental',
+                        'advisor',
+                        'money',
+                        'peer_relations',
+                      ]);
+                      return normalKeys.has(key);
+                    })
                     .map(([key, value]) => (
+                      (() => {
+                        const meta = getAttributeMeta(key);
+                        const displayValue = meta.display ? meta.display(value as number) : value;
+                        return (
                       <AttributeBar
                         key={key}
                         label={getAttributeLabel(key as keyof typeof attributes)}
                         value={value}
                         emoji={getAttributeEmoji(key)}
-                        dangerHigh={key === 'pressure' || key === 'sleep_debt'}
+                        dangerHigh={meta.dangerHigh || key === 'pressure' || key === 'sleep_debt'}
+                        minValue={meta.min}
+                        maxValue={meta.max}
+                        displayValue={displayValue}
                       />
+                        );
+                      })()
                     ))}
                 </div>
               </div>
@@ -566,6 +700,11 @@ export const GameScene: React.FC = () => {
                   onComplete={handleTypingComplete}
                 />
               </p>
+              {backlashCountdown !== null && (
+                <p className="mt-3 text-xs sm:text-sm text-red-700 font-bold">
+                  反噬倒计时：{backlashCountdown} 步
+                </p>
+              )}
             </div>
 
             {/* 选择按钮 */}
@@ -630,6 +769,11 @@ export const GameScene: React.FC = () => {
                   {currentScene.endingType === 'withdrawal' && '🎒'}
                   {currentScene.endingType === 'burnout' && '🫥'}
                   {currentScene.endingType === 'kicked' && '🧾'}
+                  {currentScene.endingType === 'eternal' && '♾️'}
+                  {currentScene.endingType === 'kpi_fail' && '📉'}
+                  {currentScene.endingType === 'fake' && '🎭'}
+                  {currentScene.endingType === 'health' && '🩺'}
+                  {currentScene.endingType === 'bankrupt' && '💸'}
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold mb-2">
                   {currentScene.endingType === 'excellent' && '优秀毕业！'}
@@ -639,6 +783,11 @@ export const GameScene: React.FC = () => {
                   {currentScene.endingType === 'withdrawal' && '顺利肄业'}
                   {currentScene.endingType === 'burnout' && '精神崩溃'}
                   {currentScene.endingType === 'kicked' && '绩效清退'}
+                  {currentScene.endingType === 'eternal' && '永延毕'}
+                  {currentScene.endingType === 'kpi_fail' && 'KPI肄业'}
+                  {currentScene.endingType === 'fake' && '伪毕业'}
+                  {currentScene.endingType === 'health' && '健康崩溃'}
+                  {currentScene.endingType === 'bankrupt' && '破产退学'}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-700">
                   {getEndingTagline(currentScene.endingType)}

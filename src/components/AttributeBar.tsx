@@ -6,6 +6,9 @@ interface AttributeBarProps {
   value: number;
   emoji?: string;
   dangerHigh?: boolean;
+  minValue?: number;
+  maxValue?: number;
+  displayValue?: string | number;
 }
 
 export const AttributeBar: React.FC<AttributeBarProps> = ({
@@ -13,7 +16,15 @@ export const AttributeBar: React.FC<AttributeBarProps> = ({
   value,
   emoji,
   dangerHigh = false,
+  minValue = 0,
+  maxValue = 100,
+  displayValue,
 }) => {
+  const normalized = (v: number) => {
+    if (maxValue === minValue) return 0;
+    const ratio = (v - minValue) / (maxValue - minValue);
+    return Math.min(1, Math.max(0, ratio)) * 100;
+  };
   const getColor = (v: number) => {
     if (dangerHigh) {
       if (v >= 70) return 'bg-red-500';
@@ -45,13 +56,13 @@ export const AttributeBar: React.FC<AttributeBarProps> = ({
       <div className="flex-1 win95-progress-bg">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${value}%` }}
+          animate={{ width: `${normalized(value)}%` }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className={`win95-progress-fill ${getColor(value)}`}
         />
       </div>
       <span className={`w-7 sm:w-8 text-xs font-bold text-right ${getTextColor(value)}`}>
-        {value}
+        {displayValue ?? Math.round(value)}
       </span>
     </div>
   );

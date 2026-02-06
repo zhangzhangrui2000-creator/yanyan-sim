@@ -498,6 +498,49 @@ export const scenes: Record<string, Scene> = {
     ],
   },
 
+  // ========== 折磨版：连锁反噬 ==========
+  backlash_chain: {
+    id: 'backlash_chain',
+    title: '连锁反噬',
+    description: '你本以为事情会过去，但新的麻烦接踵而至。\n\n系统在悄悄加码，你只能继续往前走。',
+    emoji: '🧨',
+    background: 'bg-lab',
+    choices: [
+      {
+        id: 'backlash_continue',
+        text: '继续扛下去',
+        emoji: '😵',
+        effects: {},
+        nextScene: 'backlash_chain',
+      },
+    ],
+  },
+
+  // ========== 折磨版：生病事件 ==========
+  sickness_event: {
+    id: 'sickness_event',
+    title: '生病了',
+    description: '你开始持续性头痛、发烧，精神难以集中。\n\n实验室还有一堆事等着你处理。',
+    emoji: '🩺',
+    background: 'bg-dorm',
+    choices: [
+      {
+        id: 'sick_push',
+        text: '咬牙硬扛，继续干活',
+        emoji: '🥵',
+        effects: { mental: -10, health: -10, pressure: 10 },
+        nextScene: 'daily_routine_1',
+      },
+      {
+        id: 'sick_leave',
+        text: '请假一天去看医生',
+        emoji: '🏥',
+        effects: { money: -300, health: 10, advisor: -5 },
+        nextScene: 'daily_routine_1',
+      },
+    ],
+  },
+
   // ========== 折磨版：实验室事故 ==========
   lab_incident: {
     id: 'lab_incident',
@@ -1040,6 +1083,44 @@ export const scenes: Record<string, Scene> = {
     ],
   },
 
+  ending_health: {
+    id: 'ending_health',
+    title: '健康崩溃',
+    description: '长期透支让你的身体亮起红灯。\n\n你被迫暂停学业，开始系统治疗与恢复。\n\n🩺 健康崩溃',
+    emoji: '🩺',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'health',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
+  ending_bankrupt: {
+    id: 'ending_bankrupt',
+    title: '破产退学',
+    description: '开销失控，补助断供，你的账户变成负数。\n\n现实压力逼得你退出这场游戏。\n\n💸 破产退学',
+    emoji: '💸',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'bankrupt',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
   ending_burnout: {
     id: 'ending_burnout',
     title: '精神崩溃',
@@ -1048,6 +1129,63 @@ export const scenes: Record<string, Scene> = {
     background: 'bg-dorm',
     isEnd: true,
     endingType: 'burnout',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
+  ending_kpi_fail: {
+    id: 'ending_kpi_fail',
+    title: 'KPI肄业',
+    description: '指标长期下滑，你被迫提前退出研究生旅程。\n\n这不是能力问题，而是系统的统计口径。\n\n📉 KPI肄业',
+    emoji: '📉',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'kpi_fail',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
+  ending_eternal_delay: {
+    id: 'ending_eternal_delay',
+    title: '永延毕',
+    description: '你始终差一点点达标。\n\n一年又一年，论文一改再改，答辩一次次推迟。\n\n♾️ 永延毕',
+    emoji: '♾️',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'eternal',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
+  ending_fake_graduation: {
+    id: 'ending_fake_graduation',
+    title: '伪毕业',
+    description: '你“顺利毕业”了，但导师的黑历史突然曝光，你的名字被牵连。\n\n找工作屡屡受挫，现实比毕业证更难。\n\n🎭 伪毕业',
+    emoji: '🎭',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'fake',
     choices: [
       {
         id: 'restart',
