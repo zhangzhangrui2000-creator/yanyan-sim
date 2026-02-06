@@ -5,7 +5,14 @@ export const scenes: Record<string, Scene> = {
   welcome: {
     id: 'welcome',
     title: '欢迎',
-    description: '欢迎来到读研模拟器！\n\n在这里，你将体验从入学到毕业的完整研究生生涯。\n面对各种经典场景，做出你的选择。\n\n请根据最真实的想法选择，不用担心 game over ❤️',
+    description: '欢迎来到读研模拟器！
+
+在这里，你将体验从入学到毕业的完整研究生生涯。
+面对各种经典场景，做出你的选择。
+
+请根据最真实的想法选择，不用担心 game over ❤️
+
+系统会把你的选择记得很清楚。',
     emoji: '🎓',
     background: 'bg-dorm',
     choices: [
@@ -23,7 +30,9 @@ export const scenes: Record<string, Scene> = {
   character_creation: {
     id: 'character_creation',
     title: '新生入学登记',
-    description: '请填写你的基本信息，这将影响你的初始属性。',
+    description: '请填写你的基本信息，这将影响你的初始属性。
+
+信息越完整，系统越好照顾你。',
     emoji: '📝',
     background: 'bg-library',
     choices: [
@@ -62,7 +71,11 @@ export const scenes: Record<string, Scene> = {
   first_day: {
     id: 'first_day',
     title: '入学第一天',
-    description: '你拖着行李箱来到学校，办理了入住手续。看着陌生的校园，你心里既期待又忐忑。\n\n晚上，导师发来消息："明天下午来我办公室一趟，认识一下课题组。"',
+    description: '你拖着行李箱来到学校，办理了入住手续。校园很陌生，但流程很熟悉。
+
+晚上，导师发来消息："明天下午来我办公室一趟，认识一下课题组。"
+
+这类消息通常都没有备选项。',
     emoji: '🏫',
     background: 'bg-dorm',
     choices: [
@@ -94,7 +107,11 @@ export const scenes: Record<string, Scene> = {
   first_meeting: {
     id: 'first_meeting',
     title: '第一次组会',
-    description: '这是你入学后的第一次组会。实验室里坐着十几个师兄师姐，导师让你介绍一下自己。\n\n轮到你时...',
+    description: '这是你入学后的第一次组会。实验室里坐着十几个师兄师姐，导师让你介绍一下自己。
+
+轮到你时...
+
+第一印象往往会被复用很久。',
     emoji: '🗣️',
     background: 'bg-lab',
     choices: [
@@ -126,7 +143,11 @@ export const scenes: Record<string, Scene> = {
   topic_selection: {
     id: 'topic_selection',
     title: '选题困境',
-    description: '开学已经一个月了，导师问你："想好自己的研究方向了吗？"\n\n你其实还在迷茫中...',
+    description: '开学已经一个月了，导师问你："想好自己的研究方向了吗？"
+
+你其实还在迷茫中...
+
+答案会决定你以后怎么解释现在。',
     emoji: '🤔',
     background: 'bg-library',
     choices: [
@@ -158,7 +179,15 @@ export const scenes: Record<string, Scene> = {
   strict_attendance: {
     id: 'strict_attendance',
     title: '实验室新规',
-    description: '导师在群里发通知：\n\n"从下周开始实行严格考勤制度：\n• 每周工作6天（周一至周六）\n• 早上8:30-11:30，下午13:30-17:30，晚上18:30-22:30\n• 每天打卡6次，实验室安装摄像头监控\n• 无故缺勤扣发助研津贴"\n\n群里一片沉默...',
+    description: '导师在群里发通知：
+
+"从下周开始实行严格考勤制度：
+• 每周工作6天（周一至周六）
+• 早上8:30-11:30，下午13:30-17:30，晚上18:30-22:30
+• 每天打卡6次，实验室安装摄像头监控
+• 无故缺勤扣发助研津贴"
+
+群里很安静，好像大家都在读懂含义。',
     emoji: '📹',
     background: 'bg-lab',
     choices: [
@@ -197,7 +226,12 @@ export const scenes: Record<string, Scene> = {
   torture_checkin: {
     id: 'torture_checkin',
     title: '深夜打卡',
-    description: '折磨版开始生效：实验室打卡系统升级为“人脸 + 随机抽查”。\n\n夜里 00:30，你收到群通知：\n“今晚临时抽查，30 分钟内未打卡视为缺勤。”\n\n你正在床上，眼睛已经睁不开了...',
+    description: '折磨版开始生效：实验室打卡系统升级为“人脸 + 随机抽查”。
+
+夜里 00:30，你收到群通知：
+"今晚临时抽查，30 分钟内未打卡视为缺勤。"
+
+你在床上，知道这条消息不会只是一条消息。',
     emoji: '🧾',
     background: 'bg-lab',
     choices: [
@@ -229,7 +263,11 @@ export const scenes: Record<string, Scene> = {
   daily_routine_1: {
     id: 'daily_routine_1',
     title: '看论文的日常',
-    description: '你已经看了三天论文了，这篇英文文献还是看不懂。\n\n下午组会导师可能会问进度...',
+    description: '你已经看了三天论文了，这篇英文文献还是看不懂。
+
+下午组会导师可能会问进度...
+
+你开始熟悉‘看过了’这三个字的用途。',
     emoji: '📄',
     background: 'bg-library',
     choices: [
@@ -261,7 +299,11 @@ export const scenes: Record<string, Scene> = {
   group_meeting_1: {
     id: 'group_meeting_1',
     title: '周组会',
-    description: '组会上，导师突然点名问你："这周看了几篇论文？有什么想法？"\n\n你其实只草草看了一篇...',
+    description: '组会上，导师突然点名问你："这周看了几篇论文？有什么想法？"
+
+你其实只草草看了一篇...
+
+回答之后，后面的路会更顺或更直。',
     emoji: '😰',
     background: 'bg-lab',
     choices: [
@@ -293,7 +335,11 @@ export const scenes: Record<string, Scene> = {
   tianlin_quiz: {
     id: 'tianlin_quiz',
     title: '热搜问答',
-    description: '此时，网络热搜上有一个名字「天临元年」持续霸榜。\n\n你知道“天临元年”是哪一年吗？',
+    description: '此时，网络热搜上有一个名字「天临元年」持续霸榜。
+
+你知道“天临元年”是哪一年吗？
+
+问题听起来很随意，但答案会留下记录。',
     emoji: '🔥',
     background: 'bg-lab',
     choices: [
@@ -328,7 +374,13 @@ export const scenes: Record<string, Scene> = {
   advisor_errands: {
     id: 'advisor_errands',
     title: '导师的私事',
-    description: '周五晚上，导师私聊你：\n\n"小王啊，明天周末有空吗？帮我个忙。我家要搬家，你来帮把手，顺便把几个快递取一下。对了，我孩子数学不太好，你有空的话帮忙辅导一下？"\n\n你本来计划周末赶进度的...',
+    description: '周五晚上，导师私聊你：
+
+"小王啊，明天周末有空吗？帮我个忙。我家要搬家，你来帮把手，顺便把几个快递取一下。对了，我孩子数学不太好，你有空的话帮忙辅导一下？"
+
+你本来计划周末赶进度的。
+
+有些请求从来不写进合同。',
     emoji: '📦',
     background: 'bg-dorm',
     choices: [
@@ -360,7 +412,11 @@ export const scenes: Record<string, Scene> = {
   peer_competition: {
     id: 'peer_competition',
     title: '组内的暗流',
-    description: '你发现实验室的同门小李经常在导师面前"无意"提起你的进度慢。\n\n更过分的是，他把你告诉他的研究想法，抢先做了出来，还在组会上汇报，导师夸他有想法。\n\n你气得手都在抖...',
+    description: '你发现实验室的同门小李经常在导师面前"无意"提起你的进度慢。
+
+更过分的是，他把你告诉他的研究想法，抢先做了出来，还在组会上汇报，导师夸他有想法。
+
+你意识到有些内容一旦说出口，就不再属于你。',
     emoji: '😤',
     background: 'bg-lab',
     choices: [
@@ -399,7 +455,13 @@ export const scenes: Record<string, Scene> = {
   bullying_senior: {
     id: 'bullying_senior',
     title: '实验室的"传统"',
-    description: '实验室的博士师兄老王，仗着自己资历老，经常对你冷嘲热讽。\n\n今天你在调代码，他路过看了一眼："这么简单的问题搞了一周？我当年一天就搞定了。你这水平是怎么考上研的？"\n\n旁边几个师兄师姐在偷笑...',
+    description: '实验室的博士师兄老王，仗着自己资历老，经常对你冷嘲热讽。
+
+今天你在调代码，他路过看了一眼："这么简单的问题搞了一周？我当年一天就搞定了。你这水平是怎么考上研的？"
+
+旁边几个师兄师姐在偷笑。
+
+笑声里通常没人负责。',
     emoji: '🥶',
     background: 'bg-lab',
     choices: [
@@ -438,7 +500,11 @@ export const scenes: Record<string, Scene> = {
   experiment_1: {
     id: 'experiment_1',
     title: '实验失败',
-    description: '你的实验/代码已经跑了一周了，结果还是不对。\n\n深夜11点，实验室只剩你一个人。摄像头红灯还在一闪一闪...',
+    description: '你的实验/代码已经跑了一周了，结果还是不对。
+
+深夜11点，实验室只剩你一个人。摄像头红灯还在一闪一闪...
+
+你开始习惯只有自己在看进度条。',
     emoji: '🔬',
     background: 'bg-lab',
     choices: [
@@ -470,7 +536,13 @@ export const scenes: Record<string, Scene> = {
   torture_midnight: {
     id: 'torture_midnight',
     title: '凌晨消息',
-    description: '折磨版开始生效：凌晨 02:17，导师发来语音：\n\n“明早 9 点我要看你们本周进度汇总，别拖。”\n\n你的眼睛酸痛，电脑还在跑。',
+    description: '折磨版开始生效：凌晨 02:17，导师发来语音：
+
+"明早 9 点我要看你们本周进度汇总，别拖。"
+
+你的眼睛酸痛，电脑还在跑。
+
+这类消息通常只需要确认收到。',
     emoji: '🌙',
     background: 'bg-lab',
     choices: [
@@ -502,7 +574,11 @@ export const scenes: Record<string, Scene> = {
   backlash_chain: {
     id: 'backlash_chain',
     title: '连锁反噬',
-    description: '你本以为事情会过去，但新的麻烦接踵而至。\n\n系统在悄悄加码，你只能继续往前走。',
+    description: '你本以为事情会过去，但新的麻烦接踵而至。
+
+系统在悄悄加码，你只能继续往前走。
+
+每一次应对都会留下下次的理由。',
     emoji: '🧨',
     background: 'bg-lab',
     choices: [
@@ -520,7 +596,11 @@ export const scenes: Record<string, Scene> = {
   sickness_event: {
     id: 'sickness_event',
     title: '生病了',
-    description: '你开始持续性头痛、发烧，精神难以集中。\n\n实验室还有一堆事等着你处理。',
+    description: '你开始持续性头痛、发烧，精神难以集中。
+
+实验室还有一堆事等着你处理。
+
+症状可以请假，进度不会。',
     emoji: '🩺',
     background: 'bg-dorm',
     choices: [
@@ -545,7 +625,11 @@ export const scenes: Record<string, Scene> = {
   lab_incident: {
     id: 'lab_incident',
     title: '实验室事故',
-    description: '你们组的服务器崩了，导师在群里点名要一个人负责。\n\n你知道不是你，但导师已经暗示“先有人出来扛”。',
+    description: '你们组的服务器崩了，导师在群里点名要一个人负责。
+
+你知道不是你，但导师已经暗示“先有人出来扛”。
+
+问题需要答案，责任也需要名字。',
     emoji: '🧯',
     background: 'bg-lab',
     choices: [
@@ -577,7 +661,11 @@ export const scenes: Record<string, Scene> = {
   weekend_choice: {
     id: 'weekend_choice',
     title: '周末到了',
-    description: '终于到周日了！你已经连续工作13天了。\n\n室友约你出去玩，但你还有一堆事没做完...',
+    description: '终于到周日了！你已经连续工作13天了。
+
+室友约你出去玩，但你还有一堆事没做完。
+
+休息是一种会被记住的选择。',
     emoji: '🎉',
     background: 'bg-dorm',
     choices: [
@@ -609,7 +697,13 @@ export const scenes: Record<string, Scene> = {
   paper_rejection_1: {
     id: 'paper_rejection_1',
     title: '论文被拒',
-    description: '你投了三个月的论文被拒了。审稿人给了很尖锐的意见，说你"缺乏创新性"。\n\n导师说："改改再投吧。"\n\n同门小李"安慰"你："没事，我第一篇也被拒了，你现在才拒一篇，还好啦~"',
+    description: '你投了三个月的论文被拒了。审稿人给了很尖锐的意见，说你"缺乏创新性"。
+
+导师说："改改再投吧。"
+
+同门小李"安慰"你："没事，我第一篇也被拒了，你现在才拒一篇，还好啦~"
+
+这句话听多了就会变得很轻。',
     emoji: '❌',
     background: 'bg-lab',
     choices: [
@@ -641,7 +735,13 @@ export const scenes: Record<string, Scene> = {
   theft_paper: {
     id: 'theft_paper',
     title: '晴天霹雳',
-    description: '你辛苦做了半年的实验，写了一半的论文，突然被导师叫去谈话。\n\n导师说："小王啊，你的这个方向小张（另一个同门）也在做，他进度快一些。这样吧，这个工作让他先投，你换个方向重新做。"\n\n你整个人都懵了...',
+    description: '你辛苦做了半年的实验，写了一半的论文，突然被导师叫去谈话。
+
+导师说："小王啊，你的这个方向小张（另一个同门）也在做，他进度快一些。这样吧，这个工作让他先投，你换个方向重新做。"
+
+你整个人都懵了。
+
+有人负责进度，也有人负责接受。',
     emoji: '💔',
     background: 'bg-lab',
     choices: [
@@ -673,7 +773,13 @@ export const scenes: Record<string, Scene> = {
   scholarship: {
     id: 'scholarship',
     title: '奖学金评定',
-    description: '一年一度的奖学金评定开始了。\n\n你发现自己和另一个同学分数差不多，但名额只有一个。\n\n你听说那个同学经常帮导师处理私事，还经常在朋友圈晒和导师的合影...',
+    description: '一年一度的奖学金评定开始了。
+
+你发现自己和另一个同学分数差不多，但名额只有一个。
+
+你听说那个同学经常帮导师处理私事，还经常在朋友圈晒和导师的合影。
+
+你开始明白评分表外还有一套算法。',
     emoji: '💰',
     background: 'bg-library',
     choices: [
@@ -705,7 +811,15 @@ export const scenes: Record<string, Scene> = {
   group_clique: {
     id: 'group_clique',
     title: '实验室政治',
-    description: '你发现实验室已经分成了几个小团体：\n\n• 以博士老王为首的"元老派"，仗着资历欺负新人\n• 以小李为首的"舔狗派"，天天围着导师转\n• 几个和你一样的"苦力派"，被压榨但不敢反抗\n\n有人私下拉你加入他们的"反压迫联盟"...',
+    description: '你发现实验室已经分成了几个小团体：
+
+• 以博士老王为首的"元老派"，仗着资历欺负新人
+• 以小李为首的"舔狗派"，天天围着导师转
+• 几个和你一样的"苦力派"，被压榨但不敢反抗
+
+有人私下拉你加入他们的"反压迫联盟"。
+
+联盟听起来像避风港，也可能是另一种名册。',
     emoji: '🏴‍☠️',
     background: 'bg-lab',
     choices: [
@@ -737,7 +851,11 @@ export const scenes: Record<string, Scene> = {
   relationship: {
     id: 'relationship',
     title: '感情状况',
-    description: '实验室的师兄/师姐最近对你很关心，经常帮你解决问题。\n\n你感觉ta可能对你有好感...',
+    description: '实验室的师兄/师姐最近对你很关心，经常帮你解决问题。
+
+你感觉ta可能对你有好感。
+
+关系的走向，往往会影响工作量的分配。',
     emoji: '💕',
     background: 'bg-dorm',
     choices: [
@@ -769,7 +887,11 @@ export const scenes: Record<string, Scene> = {
   midterm: {
     id: 'midterm',
     title: '中期答辩',
-    description: '转眼间到了中期检查。你的进度只完成了50%，导师看起来不太满意。\n\n答辩委员会问了一个你答不上来的问题...',
+    description: '转眼间到了中期检查。你的进度只完成了50%，导师看起来不太满意。
+
+答辩委员会问了一个你答不上来的问题。
+
+这类问题通常没有第二次。',
     emoji: '🎯',
     background: 'bg-lab',
     choices: [
@@ -801,7 +923,13 @@ export const scenes: Record<string, Scene> = {
   advisor_delay: {
     id: 'advisor_delay',
     title: '无尽的等待',
-    description: '你把毕业论文初稿发给导师已经两个月了，一直没有回复。\n\n每次问，导师都说："最近太忙，过两天看。"\n\n你听说上一届有个师兄被拖了两年才毕业，你心里越来越慌...',
+    description: '你把毕业论文初稿发给导师已经两个月了，一直没有回复。
+
+每次问，导师都说："最近太忙，过两天看。"
+
+你听说上一届有个师兄被拖了两年才毕业，你心里越来越慌。
+
+等待是一种很有效的管理方式。',
     emoji: '⏳',
     background: 'bg-lab',
     choices: [
@@ -840,7 +968,11 @@ export const scenes: Record<string, Scene> = {
   crisis: {
     id: 'crisis',
     title: '科研危机',
-    description: '你的实验设备坏了/代码被误删了/数据丢失了！\n\n这可能是几个月的工作量...',
+    description: '你的实验设备坏了/代码被误删了/数据丢失了！
+
+这可能是几个月的工作量。
+
+事故不会写进排期，但会改掉排期。',
     emoji: '💥',
     background: 'bg-lab',
     choices: [
@@ -879,7 +1011,11 @@ export const scenes: Record<string, Scene> = {
   internship_choice: {
     id: 'internship_choice',
     title: '实习机会',
-    description: '一家大厂给你发了实习offer，薪资很高。\n\n但导师说："毕业要紧，别去实习。"',
+    description: '一家大厂给你发了实习offer，薪资很高。
+
+但导师说："毕业要紧，别去实习。"
+
+有些机会来得正好，也走得很快。',
     emoji: '💼',
     background: 'bg-library',
     choices: [
@@ -911,7 +1047,11 @@ export const scenes: Record<string, Scene> = {
   thesis_writing: {
     id: 'thesis_writing',
     title: '毕业论文',
-    description: '终于到写毕业论文的时候了。你已经熬了三个通宵，但进度还是只有30%。\n\n距离提交只剩两周...',
+    description: '终于到写毕业论文的时候了。你已经熬了三个通宵，但进度还是只有30%。
+
+距离提交只剩两周。
+
+你开始学会把时间当作对手。',
     emoji: '📝',
     background: 'bg-lab',
     choices: [
@@ -943,7 +1083,11 @@ export const scenes: Record<string, Scene> = {
   blind_review: {
     id: 'blind_review',
     title: '论文盲审',
-    description: '你的论文送出去盲审了。这是决定你能否毕业的关键时刻...\n\n两周后，结果回来了。',
+    description: '你的论文送出去盲审了。这是决定你能否毕业的关键时刻...
+
+两周后，结果回来了。
+
+等待会放大每一个猜测。',
     emoji: '📨',
     background: 'bg-library',
     choices: [
@@ -960,7 +1104,13 @@ export const scenes: Record<string, Scene> = {
   blind_review_result: {
     id: 'blind_review_result',
     title: '盲审结果',
-    description: '盲审结果出来了！\n\n两位专家的意见：一位给了"优秀"，一位给了"合格"。\n\n你可以参加答辩了！',
+    description: '盲审结果出来了！
+
+两位专家的意见：一位给了"优秀"，一位给了"合格"。
+
+你可以参加答辩了。
+
+‘可以’不是‘一定’。',
     emoji: '🎉',
     background: 'bg-library',
     choices: [
@@ -978,7 +1128,13 @@ export const scenes: Record<string, Scene> = {
   final_defense: {
     id: 'final_defense',
     title: '毕业答辩',
-    description: '这是你研究生生涯的最后一场答辩。\n\n答辩委员会坐在下面，你的导师也在。\n\n你深吸一口气，开始展示...',
+    description: '这是你研究生生涯的最后一场答辩。
+
+答辩委员会坐在下面，你的导师也在。
+
+你深吸一口气，开始展示。
+
+每句话都要听起来像定稿。',
     emoji: '🎓',
     background: 'bg-lab',
     choices: [
@@ -1010,7 +1166,13 @@ export const scenes: Record<string, Scene> = {
   ending_graduation: {
     id: 'ending_graduation',
     title: '顺利毕业',
-    description: '恭喜你！你顺利通过了答辩，拿到了硕士学位！\n\n回首这几年，有熬夜的辛苦，也有收获的喜悦。那些曾经的委屈和不平，都将成为你人生的养分。\n\n无论过程如何，你做到了。\n\n🎓 毕业快乐！',
+    description: '恭喜你！你顺利通过了答辩，拿到了硕士学位！
+
+回首这几年，有熬夜的辛苦，也有收获的喜悦。那些曾经的委屈和不平，都将成为你人生的养分。
+
+无论过程如何，你做到了。
+
+🎓 毕业快乐！',
     emoji: '🎊',
     background: 'bg-library',
     isEnd: true,
@@ -1029,7 +1191,13 @@ export const scenes: Record<string, Scene> = {
   ending_excellent: {
     id: 'ending_excellent',
     title: '优秀毕业',
-    description: '太厉害了！你以优异的成绩毕业，还拿到了优秀毕业论文！\n\n导师推荐你去读博，大厂也给你发了offer。\n\n你的人生，由你选择。\n\n🏆 优秀毕业！',
+    description: '太厉害了！你以优异的成绩毕业，还拿到了优秀毕业论文！
+
+导师推荐你去读博，大厂也给你发了offer。
+
+你的人生，由你选择。
+
+🏆 优秀毕业！',
     emoji: '🏆',
     background: 'bg-library',
     isEnd: true,
@@ -1048,7 +1216,13 @@ export const scenes: Record<string, Scene> = {
   ending_delay: {
     id: 'ending_delay',
     title: '延毕了...',
-    description: '很遗憾，你的论文没有通过，需要延期毕业。\n\n但不要灰心，这只是暂时的挫折。\n\n调整状态，继续努力，你一定能毕业的！\n\n💪 加油！',
+    description: '很遗憾，你的论文没有通过，需要延期毕业。
+
+但不要灰心，这只是暂时的挫折。
+
+调整状态，继续努力，你一定能毕业的！
+
+💪 加油！',
     emoji: '⏰',
     background: 'bg-dorm',
     isEnd: true,
@@ -1067,7 +1241,13 @@ export const scenes: Record<string, Scene> = {
   ending_dropout_mental: {
     id: 'ending_dropout_mental',
     title: '休学调整',
-    description: '你的心理健康亮起了红灯，需要休学调整。\n\n记住，身体健康和心理健康永远是最重要的。\n\n调整好再出发，人生还有很多可能。\n\n❤️ 照顾好自己',
+    description: '你的心理健康亮起了红灯，需要休学调整。
+
+记住，身体健康和心理健康永远是最重要的。
+
+调整好再出发，人生还有很多可能。
+
+❤️ 照顾好自己',
     emoji: '💚',
     background: 'bg-dorm',
     isEnd: true,
@@ -1086,7 +1266,11 @@ export const scenes: Record<string, Scene> = {
   ending_health: {
     id: 'ending_health',
     title: '健康崩溃',
-    description: '长期透支让你的身体亮起红灯。\n\n你被迫暂停学业，开始系统治疗与恢复。\n\n🩺 健康崩溃',
+    description: '长期透支让你的身体亮起红灯。
+
+你被迫暂停学业，开始系统治疗与恢复。
+
+🩺 健康崩溃',
     emoji: '🩺',
     background: 'bg-dorm',
     isEnd: true,
@@ -1105,7 +1289,11 @@ export const scenes: Record<string, Scene> = {
   ending_bankrupt: {
     id: 'ending_bankrupt',
     title: '破产退学',
-    description: '开销失控，补助断供，你的账户变成负数。\n\n现实压力逼得你退出这场游戏。\n\n💸 破产退学',
+    description: '开销失控，补助断供，你的账户变成负数。
+
+现实压力逼得你退出这场游戏。
+
+💸 破产退学',
     emoji: '💸',
     background: 'bg-dorm',
     isEnd: true,
@@ -1124,7 +1312,13 @@ export const scenes: Record<string, Scene> = {
   ending_burnout: {
     id: 'ending_burnout',
     title: '精神崩溃',
-    description: '持续的高压把你彻底耗空。\n\n你开始失眠、记忆断片、对一切都失去兴趣。\n\n最终，你不得不停下，去修复被压垮的自己。\n\n🫥 精神崩溃',
+    description: '持续的高压把你彻底耗空。
+
+你开始失眠、记忆断片、对一切都失去兴趣。
+
+最终，你不得不停下，去修复被压垮的自己。
+
+🫥 精神崩溃',
     emoji: '🫥',
     background: 'bg-dorm',
     isEnd: true,
@@ -1143,7 +1337,11 @@ export const scenes: Record<string, Scene> = {
   ending_kpi_fail: {
     id: 'ending_kpi_fail',
     title: 'KPI肄业',
-    description: '指标长期下滑，你被迫提前退出研究生旅程。\n\n这不是能力问题，而是系统的统计口径。\n\n📉 KPI肄业',
+    description: '指标长期下滑，你被迫提前退出研究生旅程。
+
+这不是能力问题，而是系统的统计口径。
+
+📉 KPI肄业',
     emoji: '📉',
     background: 'bg-dorm',
     isEnd: true,
@@ -1162,7 +1360,11 @@ export const scenes: Record<string, Scene> = {
   ending_eternal_delay: {
     id: 'ending_eternal_delay',
     title: '永延毕',
-    description: '你始终差一点点达标。\n\n一年又一年，论文一改再改，答辩一次次推迟。\n\n♾️ 永延毕',
+    description: '你始终差一点点达标。
+
+一年又一年，论文一改再改，答辩一次次推迟。
+
+♾️ 永延毕',
     emoji: '♾️',
     background: 'bg-dorm',
     isEnd: true,
@@ -1181,7 +1383,11 @@ export const scenes: Record<string, Scene> = {
   ending_fake_graduation: {
     id: 'ending_fake_graduation',
     title: '伪毕业',
-    description: '你“顺利毕业”了，但导师的黑历史突然曝光，你的名字被牵连。\n\n找工作屡屡受挫，现实比毕业证更难。\n\n🎭 伪毕业',
+    description: '你“顺利毕业”了，但导师的黑历史突然曝光，你的名字被牵连。
+
+找工作屡屡受挫，现实比毕业证更难。
+
+🎭 伪毕业',
     emoji: '🎭',
     background: 'bg-dorm',
     isEnd: true,
@@ -1200,7 +1406,13 @@ export const scenes: Record<string, Scene> = {
   ending_kicked: {
     id: 'ending_kicked',
     title: '绩效清退',
-    description: '多次绩效预警后，你被要求退出课题组。\n\n没有人会为你的缺口买单，系统只看指标。\n\n这不是终点，但它确实是一个沉重的落点。\n\n🧾 绩效清退',
+    description: '多次绩效预警后，你被要求退出课题组。
+
+没有人会为你的缺口买单，系统只看指标。
+
+这不是终点，但它确实是一个沉重的落点。
+
+🧾 绩效清退',
     emoji: '🧾',
     background: 'bg-dorm',
     isEnd: true,
@@ -1219,7 +1431,13 @@ export const scenes: Record<string, Scene> = {
   ending_withdrawal: {
     id: 'ending_withdrawal',
     title: '顺利肄业',
-    description: '你对“天临元年”的回答让现场短暂沉默。\n\n最终，你决定提前结束这段研究生旅程，把精力留给更适合自己的方向。\n\n肄业不是失败，而是选择。换条路，人生仍然可以写出新章节。\n\n🎒 顺利肄业',
+    description: '你对“天临元年”的回答让现场短暂沉默。
+
+最终，你决定提前结束这段研究生旅程，把精力留给更适合自己的方向。
+
+肄业不是失败，而是选择。换条路，人生仍然可以写出新章节。
+
+🎒 顺利肄业',
     emoji: '🎒',
     background: 'bg-dorm',
     isEnd: true,
