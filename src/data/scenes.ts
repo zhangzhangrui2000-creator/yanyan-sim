@@ -11,7 +11,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'start',
-        text: '开始我的研究生之旅',
+        text: '点火开局，进炼狱',
         emoji: '🚀',
         effects: {},
         nextScene: 'character_creation',
@@ -29,28 +29,28 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'create_male_top2_cs_push',
-        text: 'TOP2本科，计算机专业，Push型导师',
+        text: 'TOP2本科，计算机专业，Push型导师（开局就卷）',
         emoji: '👨‍💻',
         effects: {},
         nextScene: 'first_day',
       },
       {
         id: 'create_female_985_science_free',
-        text: '985本科，理工科，放养型导师',
+        text: '985本科，理工科，放养型导师（自生自灭）',
         emoji: '👩‍🔬',
         effects: {},
         nextScene: 'first_day',
       },
       {
         id: 'create_male_normal_industry',
-        text: '普通211，经管专业，业界型导师',
+        text: '普通211，经管专业，业界型导师（换绩效换资源）',
         emoji: '👨‍💼',
         effects: {},
         nextScene: 'first_day',
       },
       {
         id: 'create_female_other_humanities_academic',
-        text: '其他院校，人文社科，学术型导师',
+        text: '其他院校，人文社科，学术型导师（低配起跑）',
         emoji: '👩‍🏫',
         effects: {},
         nextScene: 'first_day',
@@ -68,21 +68,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'prepare_well',
-        text: '认真准备自我介绍，查阅导师的论文',
+        text: '熬夜做自我介绍，先把自己包装好',
         emoji: '📚',
         effects: { academic: 5, mental: -5 },
         nextScene: 'first_meeting',
       },
       {
         id: 'relax',
-        text: '先好好休息，明天随机应变',
+        text: '先睡一觉，明天再被现实打醒',
         emoji: '😴',
         effects: { mental: 5, advisor: -5 },
         nextScene: 'first_meeting',
       },
       {
         id: 'ask_senior',
-        text: '找学长学姐打听导师风格',
+        text: '先打听导师脾气，别一脚踩雷',
         emoji: '🔍',
         effects: { advisor: 5, mental: 5, peer_relations: 5 },
         nextScene: 'first_meeting',
@@ -100,21 +100,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'honest',
-        text: '坦诚地说自己还没想清楚研究方向',
+        text: '承认迷茫，等着被贴标签',
         emoji: '😅',
         effects: { mental: 5, advisor: -5 },
         nextScene: 'topic_selection',
       },
       {
         id: 'bluff',
-        text: '硬着头皮吹一个宏大的研究计划',
+        text: '吹个大饼，先混过这一关',
         emoji: '🎤',
         effects: { academic: -5, advisor: 5 },
         nextScene: 'topic_selection',
       },
       {
         id: 'prepared',
-        text: '展示了提前准备的PPT，详细讲解',
+        text: '用PPT撑场面，先把导师哄住',
         emoji: '📊',
         effects: { academic: 5, mental: -10, advisor: 10 },
         nextScene: 'topic_selection',
@@ -132,21 +132,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'follow_advisor',
-        text: '选导师擅长的方向，稳妥毕业',
+        text: '走导师路线，稳妥但失去主权',
         emoji: '👨‍🏫',
         effects: { academic: 5, advisor: 10, mental: -5 },
         nextScene: 'strict_attendance',
       },
       {
         id: 'follow_interest',
-        text: '选自己感兴趣但导师不熟的方向',
+        text: '走自己兴趣，换一条更难的路',
         emoji: '❤️',
         effects: { academic: -5, advisor: -10, mental: 10 },
         nextScene: 'strict_attendance',
       },
       {
         id: 'hot_topic',
-        text: '选当前最热门的发论文方向',
+        text: '追热点，拿指标但更卷',
         emoji: '🔥',
         effects: { academic: 10, mental: -10, money: -5 },
         nextScene: 'strict_attendance',
@@ -164,28 +164,28 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'accept_rules',
-        text: '默默接受，遵守规定',
+        text: '忍着吞下，别出头',
         emoji: '😔',
         effects: { mental: -15, advisor: 5, money: -5 },
         nextScene: 'daily_routine_1',
       },
       {
         id: 'complain_peer',
-        text: '私下和同门吐槽，抱团取暖',
+        text: '抱团吐槽，换点同门温度',
         emoji: '💬',
         effects: { mental: 5, peer_relations: 10, advisor: -5 },
         nextScene: 'daily_routine_1',
       },
       {
         id: 'ask_exception',
-        text: '找导师申请特殊情况（如身体原因）',
+        text: '硬着头皮要例外',
         emoji: '🙏',
         effects: { advisor: -10, mental: 5 },
         nextScene: 'daily_routine_1',
       },
       {
         id: 'report_rules',
-        text: '向学院反映不合理考勤',
+        text: '向上举报，赌一把后果',
         emoji: '🧾',
         effects: { advisor: -15, mental: -5, peer_relations: -5 },
         nextScene: 'daily_routine_1',
@@ -203,21 +203,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'torture_run_back',
-        text: '翻身起床冲回实验室打卡',
+        text: '半夜爬起来去打卡',
         emoji: '🏃',
         effects: { academic: 5, mental: -15, pressure: 15 },
         nextScene: 'daily_routine_1',
       },
       {
         id: 'torture_fake',
-        text: '找同门代打卡（欠人情）',
+        text: '求人代打，欠人情',
         emoji: '🤝',
         effects: { peer_relations: -10, money: -5, pressure: 10 },
         nextScene: 'daily_routine_1',
       },
       {
         id: 'torture_sleep',
-        text: '装睡，赌导师不会追究',
+        text: '装死不去，赌系统瞎',
         emoji: '😴',
         effects: { advisor: -15, money: -10, pressure: 10 },
         nextScene: 'daily_routine_1',
@@ -235,21 +235,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'keep_reading',
-        text: '继续硬啃，查字典逐句翻译',
+        text: '硬啃英文，慢慢磨',
         emoji: '📖',
         effects: { academic: 10, mental: -10 },
         nextScene: 'group_meeting_1',
       },
       {
         id: 'ask_chatgpt',
-        text: '用ChatGPT帮忙理解，提高效率',
+        text: '用AI速读，赌不被抓',
         emoji: '🤖',
         effects: { academic: 5, mental: 5 },
         nextScene: 'group_meeting_1',
       },
       {
         id: 'ask_senior_paper',
-        text: '找师兄师姐请教这篇论文',
+        text: '求师兄讲解，换人情',
         emoji: '👥',
         effects: { academic: 5, peer_relations: 5 },
         nextScene: 'group_meeting_1',
@@ -267,21 +267,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'honest_progress',
-        text: '如实汇报，承认进度慢',
+        text: '如实承认，等着被盯',
         emoji: '😔',
         effects: { advisor: -5, mental: 5 },
         nextScene: 'tianlin_quiz',
       },
       {
         id: 'exaggerate',
-        text: '稍微夸大一下，说看了3篇',
+        text: '小谎换面子',
         emoji: '😏',
         effects: { advisor: 5, mental: -10 },
         nextScene: 'tianlin_quiz',
       },
       {
         id: 'divert',
-        text: '转移话题，问导师一个技术问题',
+        text: '甩个技术问题转移火力',
         emoji: '🤓',
         effects: { academic: 5, advisor: 5 },
         nextScene: 'tianlin_quiz',
@@ -299,25 +299,25 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'tianlin_2017',
-        text: '2017年',
+        text: '2017年（靠运气蒙）',
         effects: { mental: -5 },
         nextScene: 'ending_withdrawal',
       },
       {
         id: 'tianlin_2018',
-        text: '2018年',
+        text: '2018年（瞎猜）',
         effects: { mental: -5 },
         nextScene: 'ending_withdrawal',
       },
       {
         id: 'tianlin_2019',
-        text: '2019年',
+        text: '2019年（正解）',
         effects: { academic: 2 },
         nextScene: 'advisor_errands',
       },
       {
         id: 'tianlin_2020',
-        text: '2020年',
+        text: '2020年（偏离现实）',
         effects: { mental: -5 },
         nextScene: 'ending_withdrawal',
       },
@@ -334,21 +334,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'agree_all',
-        text: '全部答应，导师的事最重要',
+        text: '全都答应，换一线好感',
         emoji: '🙇',
         effects: { advisor: 15, mental: -10, academic: -10, money: -5 },
         nextScene: 'peer_competition',
       },
       {
         id: 'partial_agree',
-        text: '答应搬家，但说没时间辅导',
+        text: '只答应搬家，划清界线',
         emoji: '🤷',
         effects: { advisor: 5, mental: -5, academic: -5 },
         nextScene: 'peer_competition',
       },
       {
         id: 'refuse_politely',
-        text: '委婉拒绝，说周末要赶论文进度',
+        text: '拒绝，准备被记账',
         emoji: '😅',
         effects: { advisor: -15, mental: 5, academic: 5 },
         nextScene: 'peer_competition',
@@ -366,28 +366,28 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'confront_directly',
-        text: '当场揭穿他，在组会上对质',
+        text: '当场撕破脸',
         emoji: '⚔️',
         effects: { peer_relations: -20, advisor: -10, mental: -10 },
         nextScene: 'bullying_senior',
       },
       {
         id: 'tell_advisor',
-        text: '私下找导师说明情况',
+        text: '找导师告状，赌他站你',
         emoji: '📞',
         effects: { advisor: -5, peer_relations: -10, mental: -5 },
         nextScene: 'bullying_senior',
       },
       {
         id: 'form_alliance',
-        text: '找其他被欺负的同门抱团',
+        text: '拉同门结盟',
         emoji: '🤝',
         effects: { peer_relations: 15, mental: 5 },
         nextScene: 'bullying_senior',
       },
       {
         id: 'swallow_anger',
-        text: '忍气吞声，以后防着点',
+        text: '咽下去，暗自防人',
         emoji: '😶',
         effects: { mental: -15, academic: 5 },
         nextScene: 'bullying_senior',
@@ -405,28 +405,28 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'talk_back',
-        text: '怼回去："您当年条件不一样"',
+        text: '怼回去，硬碰硬',
         emoji: '🔥',
         effects: { peer_relations: -15, mental: 5 },
         nextScene: 'experiment_1',
       },
       {
         id: 'stay_silent',
-        text: '沉默不语，继续干活',
+        text: '沉默，继续当工具人',
         emoji: '😶',
         effects: { mental: -10, peer_relations: -5 },
         nextScene: 'experiment_1',
       },
       {
         id: 'ask_help_humbly',
-        text: '虚心请教："师兄能指点一下吗？"',
+        text: '装谦虚，讨口饭吃',
         emoji: '🙏',
         effects: { academic: 5, peer_relations: 5, mental: -5 },
         nextScene: 'experiment_1',
       },
       {
         id: 'complain_advisor',
-        text: '向导师反映这个情况',
+        text: '找导师说理，赌他管不管',
         emoji: '📢',
         effects: { advisor: -5, peer_relations: -20, mental: 5 },
         nextScene: 'experiment_1',
@@ -444,21 +444,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'stay_up',
-        text: '继续熬夜调试，不信搞不定',
+        text: '熬到天亮，死磕',
         emoji: '☕',
         effects: { academic: 5, mental: -15, money: -5 },
         nextScene: 'weekend_choice',
       },
       {
         id: 'go_sleep',
-        text: '先回去睡觉，明天再说',
+        text: '先睡，实验先放着',
         emoji: '🛏️',
         effects: { mental: 10 },
         nextScene: 'weekend_choice',
       },
       {
         id: 'ask_help',
-        text: '在群里问师兄师姐',
+        text: '群里求助，面子归零',
         emoji: '💬',
         effects: { academic: 5, peer_relations: 5 },
         nextScene: 'weekend_choice',
@@ -476,21 +476,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'torture_pull_allnighter',
-        text: '硬扛到天亮，整理汇总',
+        text: '通宵拼汇报',
         emoji: '☕',
         effects: { academic: 5, mental: -20, pressure: 15 },
         nextScene: 'weekend_choice',
       },
       {
         id: 'torture_quick_patch',
-        text: '临时拼凑一份“能看”的汇报',
+        text: '拼一份能糊弄的',
         emoji: '🧩',
         effects: { advisor: -5, mental: -10, pressure: 10 },
         nextScene: 'weekend_choice',
       },
       {
         id: 'torture_ignore',
-        text: '假装没看到，先睡',
+        text: '装没看到，先保命',
         emoji: '🙈',
         effects: { advisor: -20, pressure: 10 },
         nextScene: 'weekend_choice',
@@ -508,7 +508,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'backlash_continue',
-        text: '继续扛下去',
+        text: '继续扛，下一个雷等着',
         emoji: '😵',
         effects: {},
         nextScene: 'backlash_chain',
@@ -526,14 +526,14 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'sick_push',
-        text: '咬牙硬扛，继续干活',
+        text: '带病硬扛',
         emoji: '🥵',
         effects: { mental: -10, health: -10, pressure: 10 },
         nextScene: 'daily_routine_1',
       },
       {
         id: 'sick_leave',
-        text: '请假一天去看医生',
+        text: '请假看病，账单自己扛',
         emoji: '🏥',
         effects: { money: -300, health: 10, advisor: -5 },
         nextScene: 'daily_routine_1',
@@ -551,21 +551,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'incident_take_blame',
-        text: '认下责任，先稳住场面',
+        text: '先背锅，保住位置',
         emoji: '😶',
         effects: { advisor: 10, mental: -20, pressure: 15 },
         nextScene: 'internship_choice',
       },
       {
         id: 'incident_fight',
-        text: '据理力争，要求查日志',
+        text: '据理力争，赌不被穿小鞋',
         emoji: '📑',
         effects: { advisor: -20, peer_relations: -10, pressure: 10 },
         nextScene: 'internship_choice',
       },
       {
         id: 'incident_shift',
-        text: '私下协调，推给运维/师兄',
+        text: '把锅推走，换一身黑',
         emoji: '🌀',
         effects: { peer_relations: -15, mental: -10, pressure: 10 },
         nextScene: 'internship_choice',
@@ -583,21 +583,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'work_weekend',
-        text: '继续干活，科研人没有周末',
+        text: '继续干，周末不存在',
         emoji: '💻',
         effects: { academic: 10, mental: -15 },
         nextScene: 'paper_rejection_1',
       },
       {
         id: 'go_out',
-        text: '出去玩一天，劳逸结合',
+        text: '出去玩一晚，第二天加倍还',
         emoji: '🎮',
         effects: { mental: 15, money: -10, academic: -5 },
         nextScene: 'paper_rejection_1',
       },
       {
         id: 'sleep_weekend',
-        text: '在宿舍睡两天',
+        text: '睡两天，进度作废',
         emoji: '😴',
         effects: { mental: 20, academic: -10 },
         nextScene: 'paper_rejection_1',
@@ -615,21 +615,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'revise_resubmit',
-        text: '认真修改，投一个低一点的会议',
+        text: '继续改投，拖命',
         emoji: '🔧',
         effects: { academic: 5, mental: -10 },
         nextScene: 'theft_paper',
       },
       {
         id: 'argue_reviewers',
-        text: '写反驳信， argue 审稿人',
+        text: '硬刚审稿人',
         emoji: '📝',
         effects: { academic: -5, mental: -5, advisor: -5 },
         nextScene: 'theft_paper',
       },
       {
         id: 'sarcasm_back',
-        text: '回怼小李："你拒了三篇当然觉得我好"',
+        text: '回怼同门，彻底翻脸',
         emoji: '😏',
         effects: { peer_relations: -10, mental: 5 },
         nextScene: 'theft_paper',
@@ -647,21 +647,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'accept_unfair',
-        text: '默默接受，重新开始',
+        text: '忍着重来',
         emoji: '😭',
         effects: { academic: -15, mental: -20, advisor: -10, peer_relations: -15 },
         nextScene: 'scholarship',
       },
       {
         id: 'argue_evidence',
-        text: '据理力争，拿出实验记录证明是你先做的',
+        text: '死磕到底',
         emoji: '📊',
         effects: { advisor: -20, mental: -10, peer_relations: -20 },
         nextScene: 'scholarship',
       },
       {
         id: 'negotiate_coauthor',
-        text: '请求挂共一作者',
+        text: '讨个共一，换条活路',
         emoji: '🤝',
         effects: { advisor: -5, academic: -5, peer_relations: -10 },
         nextScene: 'scholarship',
@@ -679,21 +679,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'compete_fair',
-        text: '凭实力竞争，不玩套路',
+        text: '硬拼实力，赌公平',
         emoji: '💪',
         effects: { mental: 5, money: -10 },
         nextScene: 'group_clique',
       },
       {
         id: 'ask_advisor',
-        text: '找导师帮忙说句话',
+        text: '求导师说话，欠人情',
         emoji: '🙏',
         effects: { advisor: -5, money: 10 },
         nextScene: 'group_clique',
       },
       {
         id: 'start_licking',
-        text: '也开始"舔"导师，多帮做事',
+        text: '开始跪舔，换指标',
         emoji: '👅',
         effects: { advisor: 10, money: 15, mental: -15, peer_relations: -10 },
         nextScene: 'group_clique',
@@ -711,21 +711,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'join_alliance',
-        text: '加入"反压迫联盟"，抱团取暖',
+        text: '进反压迫联盟，赌不被清算',
         emoji: '🤝',
         effects: { peer_relations: 20, mental: 10, advisor: -10 },
         nextScene: 'relationship',
       },
       {
         id: 'stay_neutral',
-        text: '保持中立，谁也不得罪',
+        text: '中立苟住',
         emoji: '😐',
         effects: { peer_relations: -5, mental: -5 },
         nextScene: 'relationship',
       },
       {
         id: 'join_lickers',
-        text: '加入"舔狗派"，抱紧导师大腿',
+        text: '抱导师大腿保命',
         emoji: '👅',
         effects: { advisor: 15, peer_relations: -20, mental: -10 },
         nextScene: 'relationship',
@@ -743,21 +743,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'pursue',
-        text: '主动表白，实验室恋情我来了',
+        text: '谈恋爱，赌不翻车',
         emoji: '💘',
         effects: { mental: 15, academic: -5, peer_relations: 5 },
         nextScene: 'midterm',
       },
       {
         id: 'ignore',
-        text: '装作不知道，科研第一',
+        text: '断情绝爱，专心苟',
         emoji: '🚫',
         effects: { academic: 5, mental: -5 },
         nextScene: 'midterm',
       },
       {
         id: 'ambiguous',
-        text: '保持暧昧，享受被关心的感觉',
+        text: '暧昧续命',
         emoji: '😏',
         effects: { mental: 10, academic: -10 },
         nextScene: 'midterm',
@@ -775,21 +775,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'admit',
-        text: '承认准备不足，承诺加快进度',
+        text: '承认不足，准备背锅',
         emoji: '😓',
         effects: { advisor: -10, mental: -5 },
         nextScene: 'advisor_delay',
       },
       {
         id: 'bluff_midterm',
-        text: '硬着头皮瞎编，假装很懂',
+        text: '硬编到底',
         emoji: '🎭',
         effects: { academic: -10, advisor: -15 },
         nextScene: 'advisor_delay',
       },
       {
         id: 'ask_time',
-        text: '请求延期，需要更多时间',
+        text: '开口延期，先活着',
         emoji: '⏰',
         effects: { advisor: -5, mental: 10 },
         nextScene: 'advisor_delay',
@@ -807,28 +807,28 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'keep_asking',
-        text: '每周催一次，坚持不懈',
+        text: '每周催一次，逼到他烦',
         emoji: '📞',
         effects: { advisor: -15, mental: -10 },
         nextScene: 'crisis',
       },
       {
         id: 'bribe_gift',
-        text: '送点礼物，"表示表示"',
+        text: '送礼换进度',
         emoji: '🎁',
         effects: { money: -20, advisor: 10, mental: -5 },
         nextScene: 'crisis',
       },
       {
         id: 'ask_senior_intervene',
-        text: '请实验室元老帮忙说情',
+        text: '求元老出面，换一个台阶',
         emoji: '🙏',
         effects: { peer_relations: -10, advisor: 5 },
         nextScene: 'crisis',
       },
       {
         id: 'wait_patiently',
-        text: '继续等，相信导师',
+        text: '继续等，赌他良心',
         emoji: '🧘',
         effects: { mental: -5, academic: -5 },
         nextScene: 'crisis',
@@ -846,28 +846,28 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'start_over',
-        text: '从头再来，科研就是这样',
+        text: '重来，接受清零',
         emoji: '🔄',
         effects: { academic: -10, mental: -20 },
         nextScene: 'internship_choice',
       },
       {
         id: 'ask_advisor_help',
-        text: '找导师求助，看有没有备份',
+        text: '求导师救命',
         emoji: '🆘',
         effects: { advisor: -10, academic: 5 },
         nextScene: 'internship_choice',
       },
       {
         id: 'take_break',
-        text: '先休息一周，调整心情',
+        text: '停一周，后果自负',
         emoji: '🏖️',
         effects: { mental: 15, academic: -15 },
         nextScene: 'internship_choice',
       },
       {
         id: 'blame_self',
-        text: '主动背锅，承认是自己疏忽',
+        text: '自己背锅，先保平安',
         emoji: '😶',
         effects: { advisor: 5, mental: -20, peer_relations: -5 },
         nextScene: 'internship_choice',
@@ -885,21 +885,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'take_internship',
-        text: '偷偷去实习，赚钱要紧',
+        text: '偷偷实习，赚快钱',
         emoji: '💰',
         effects: { money: 20, academic: -15, advisor: -15 },
         nextScene: 'thesis_writing',
       },
       {
         id: 'refuse',
-        text: '听导师的，专心写论文',
+        text: '听导师的，继续锁死',
         emoji: '📚',
         effects: { academic: 10, advisor: 10, money: -5 },
         nextScene: 'thesis_writing',
       },
       {
         id: 'negotiate',
-        text: '和导师商量，远程实习',
+        text: '谈远程，赌他放行',
         emoji: '🤝',
         effects: { money: 10, academic: -5, advisor: -5 },
         nextScene: 'thesis_writing',
@@ -917,21 +917,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'all_nighter',
-        text: '继续爆肝，每天睡4小时',
+        text: '爆肝到麻木',
         emoji: '☕',
         effects: { academic: 15, mental: -25 },
         nextScene: 'blind_review',
       },
       {
         id: 'ask_gpt',
-        text: '用AI辅助写作，提高效率',
+        text: '用AI抄捷径',
         emoji: '🤖',
         effects: { academic: 5, mental: 5 },
         nextScene: 'blind_review',
       },
       {
         id: 'ask_advisor_review',
-        text: '请导师帮忙看看，求指导',
+        text: '求导师看稿，赌他回你',
         emoji: '🙏',
         effects: { advisor: -10, academic: 10 },
         nextScene: 'blind_review',
@@ -949,7 +949,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'check_result',
-        text: '查看盲审结果',
+        text: '打开盲审结果',
         emoji: '👀',
         effects: {},
         nextScene: 'blind_review_result',
@@ -966,7 +966,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'prepare_defense',
-        text: '准备最终答辩',
+        text: '准备答辩，赌命',
         emoji: '🎯',
         effects: { mental: 10 },
         nextScene: 'final_defense',
@@ -984,21 +984,21 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'defense_confident',
-        text: '自信满满，流畅完成答辩',
+        text: '硬着头皮一口气讲完',
         emoji: '💪',
         effects: { academic: 10 },
         nextScene: 'ending_graduation',
       },
       {
         id: 'defense_nervous',
-        text: '虽然紧张，但还算顺利',
+        text: '勉强讲完',
         emoji: '😅',
         effects: { mental: -5 },
         nextScene: 'ending_graduation',
       },
       {
         id: 'defense_bad',
-        text: '发挥失常，被问住了',
+        text: '翻车，被问到沉默',
         emoji: '😰',
         effects: { academic: -5, mental: -10 },
         nextScene: 'ending_delay',
@@ -1018,7 +1018,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '再玩一次',
+        text: '再来一遍，看看能不能活',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1037,7 +1037,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '再玩一次',
+        text: '再来一遍，看看能不能活',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1056,7 +1056,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1075,7 +1075,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1094,7 +1094,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1113,7 +1113,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1132,7 +1132,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1151,7 +1151,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1170,7 +1170,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1189,7 +1189,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1208,7 +1208,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
@@ -1227,7 +1227,7 @@ export const scenes: Record<string, Scene> = {
     choices: [
       {
         id: 'restart',
-        text: '重新开始',
+        text: '重开一局，别抱幻想',
         emoji: '🔄',
         effects: {},
         nextScene: 'welcome',
