@@ -17,6 +17,7 @@ export const GameScene: React.FC = () => {
     makeChoice, 
     getAttributeLabel,
     character,
+    mode,
   } = useGameStore();
 
   const [showChoices, setShowChoices] = useState(false);
@@ -51,6 +52,10 @@ export const GameScene: React.FC = () => {
         return '延期毕业';
       case 'dropout':
         return '休学调整';
+      case 'burnout':
+        return '精神崩溃';
+      case 'kicked':
+        return '绩效清退';
       case 'withdrawal':
         return '顺利肄业';
       default:
@@ -68,6 +73,10 @@ export const GameScene: React.FC = () => {
         return '慢一点，也在前进';
       case 'dropout':
         return '照顾好自己，未来可期';
+      case 'burnout':
+        return '系统过载，强制停机';
+      case 'kicked':
+        return '指标未达标，被动出局';
       case 'withdrawal':
         return '及时止损，换个剧本';
       default:
@@ -126,6 +135,20 @@ export const GameScene: React.FC = () => {
       return '心理成长：需要休息与恢复';
     };
 
+    const sleepLoad = (value: number) => {
+      if (value >= 85) return '睡眠负债：长期透支，崩溃临界';
+      if (value >= 70) return '睡眠负债：明显透支，注意力下降';
+      if (value >= 50) return '睡眠负债：疲劳累积，效率下降';
+      return '睡眠负债：基本可控';
+    };
+
+    const pressureLoad = (value: number) => {
+      if (value >= 85) return '绩效压力：长期超载，濒临崩溃';
+      if (value >= 70) return '绩效压力：高压运行，风险上升';
+      if (value >= 50) return '绩效压力：压力明显，但还能扛住';
+      return '绩效压力：负荷可控，尚有余地';
+    };
+
     const career = (academicValue: number, advisorValue: number, moneyValue: number) => {
       const score = Math.round((academicValue + advisorValue + moneyValue) / 3);
       if (score >= 85) return '就业去向：直博/高薪 Offer，多选其一';
@@ -140,7 +163,11 @@ export const GameScene: React.FC = () => {
         ? '节奏调整：先照顾自己，未来依然有路可走'
         : endingType === 'withdrawal'
           ? '节奏调整：换条赛道，人生依然精彩'
-          : '节奏调整：按计划推进，目标达成感提升';
+          : endingType === 'burnout'
+            ? '节奏调整：停下来，先修复自己'
+            : endingType === 'kicked'
+              ? '节奏调整：退场重整，未来仍可转圜'
+              : '节奏调整：按计划推进，目标达成感提升';
 
     return [
       research(attributes.academic),
@@ -151,6 +178,8 @@ export const GameScene: React.FC = () => {
       finance(attributes.money),
       career(attributes.academic, attributes.advisor, attributes.money),
       wellbeing(attributes.mental),
+      pressureLoad(attributes.pressure),
+      sleepLoad(attributes.sleep_debt),
       endingNote,
     ];
   };
@@ -207,6 +236,28 @@ export const GameScene: React.FC = () => {
           text: '#dcfce7',
           subtext: 'rgba(220, 252, 231, 0.75)',
           qrDark: '#064e3b',
+          qrLight: '#ffffff',
+        };
+      case 'burnout':
+        return {
+          bgFrom: '#0b0f19',
+          bgTo: '#1f2937',
+          accent: '#f87171',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#f8fafc',
+          subtext: 'rgba(248, 250, 252, 0.75)',
+          qrDark: '#111827',
+          qrLight: '#ffffff',
+        };
+      case 'kicked':
+        return {
+          bgFrom: '#111827',
+          bgTo: '#7f1d1d',
+          accent: '#f97316',
+          panel: 'rgba(255, 255, 255, 0.1)',
+          text: '#fef2f2',
+          subtext: 'rgba(254, 242, 242, 0.75)',
+          qrDark: '#111827',
           qrLight: '#ffffff',
         };
       case 'withdrawal':
@@ -405,6 +456,9 @@ export const GameScene: React.FC = () => {
       advisor: '👨‍🏫',
       money: '💰',
       peer_relations: '👥',
+      pressure: '📉',
+      advisor_mood: '😶‍🌫️',
+      sleep_debt: '🛌',
     };
     return emojis[key] || '';
   };
@@ -454,20 +508,41 @@ export const GameScene: React.FC = () => {
                     第 {progress.semester} 学期 · 第 {progress.week} 周
                   </span>
                 </div>
+                {mode === 'torture' && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">📛</span>
+                    <span className="text-sm font-bold">
+                      KPI预警 {progress.kpiWarnings}/3
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-center gap-2">
+                  <span className="text-sm">⚙️</span>
+                  <span className="text-sm font-bold">
+                    {mode === 'torture' ? '折磨版' : '标准版'}
+                  </span>
+                </div>
                 
                 {/* 分隔线 */}
                 <div className="w-px bg-gray-400" />
                 
                 {/* 属性条 */}
-                <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
-                  {Object.entries(attributes).map(([key, value]) => (
-                    <AttributeBar
-                      key={key}
-                      label={getAttributeLabel(key as keyof typeof attributes)}
-                      value={value}
-                      emoji={getAttributeEmoji(key)}
-                    />
-                  ))}
+                <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
+                  {Object.entries(attributes)
+                    .filter(([key]) =>
+                      mode === 'torture'
+                        ? true
+                        : key !== 'pressure' && key !== 'advisor_mood' && key !== 'sleep_debt'
+                    )
+                    .map(([key, value]) => (
+                      <AttributeBar
+                        key={key}
+                        label={getAttributeLabel(key as keyof typeof attributes)}
+                        value={value}
+                        emoji={getAttributeEmoji(key)}
+                        dangerHigh={key === 'pressure' || key === 'sleep_debt'}
+                      />
+                    ))}
                 </div>
               </div>
             </div>
@@ -553,6 +628,8 @@ export const GameScene: React.FC = () => {
                   {currentScene.endingType === 'delay' && '⏰'}
                   {currentScene.endingType === 'dropout' && '💚'}
                   {currentScene.endingType === 'withdrawal' && '🎒'}
+                  {currentScene.endingType === 'burnout' && '🫥'}
+                  {currentScene.endingType === 'kicked' && '🧾'}
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold mb-2">
                   {currentScene.endingType === 'excellent' && '优秀毕业！'}
@@ -560,6 +637,8 @@ export const GameScene: React.FC = () => {
                   {currentScene.endingType === 'delay' && '延期毕业'}
                   {currentScene.endingType === 'dropout' && '休学调整'}
                   {currentScene.endingType === 'withdrawal' && '顺利肄业'}
+                  {currentScene.endingType === 'burnout' && '精神崩溃'}
+                  {currentScene.endingType === 'kicked' && '绩效清退'}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-700">
                   {getEndingTagline(currentScene.endingType)}

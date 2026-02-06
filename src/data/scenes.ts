@@ -183,6 +183,45 @@ export const scenes: Record<string, Scene> = {
         effects: { advisor: -10, mental: 5 },
         nextScene: 'daily_routine_1',
       },
+      {
+        id: 'report_rules',
+        text: '向学院反映不合理考勤',
+        emoji: '🧾',
+        effects: { advisor: -15, mental: -5, peer_relations: -5 },
+        nextScene: 'daily_routine_1',
+      },
+    ],
+  },
+
+  // ========== 折磨版：深夜打卡 ==========
+  torture_checkin: {
+    id: 'torture_checkin',
+    title: '深夜打卡',
+    description: '折磨版开始生效：实验室打卡系统升级为“人脸 + 随机抽查”。\n\n夜里 00:30，你收到群通知：\n“今晚临时抽查，30 分钟内未打卡视为缺勤。”\n\n你正在床上，眼睛已经睁不开了...',
+    emoji: '🧾',
+    background: 'bg-lab',
+    choices: [
+      {
+        id: 'torture_run_back',
+        text: '翻身起床冲回实验室打卡',
+        emoji: '🏃',
+        effects: { academic: 5, mental: -15, pressure: 15 },
+        nextScene: 'daily_routine_1',
+      },
+      {
+        id: 'torture_fake',
+        text: '找同门代打卡（欠人情）',
+        emoji: '🤝',
+        effects: { peer_relations: -10, money: -5, pressure: 10 },
+        nextScene: 'daily_routine_1',
+      },
+      {
+        id: 'torture_sleep',
+        text: '装睡，赌导师不会追究',
+        emoji: '😴',
+        effects: { advisor: -15, money: -10, pressure: 10 },
+        nextScene: 'daily_routine_1',
+      },
     ],
   },
 
@@ -423,6 +462,70 @@ export const scenes: Record<string, Scene> = {
         emoji: '💬',
         effects: { academic: 5, peer_relations: 5 },
         nextScene: 'weekend_choice',
+      },
+    ],
+  },
+
+  // ========== 折磨版：凌晨消息 ==========
+  torture_midnight: {
+    id: 'torture_midnight',
+    title: '凌晨消息',
+    description: '折磨版开始生效：凌晨 02:17，导师发来语音：\n\n“明早 9 点我要看你们本周进度汇总，别拖。”\n\n你的眼睛酸痛，电脑还在跑。',
+    emoji: '🌙',
+    background: 'bg-lab',
+    choices: [
+      {
+        id: 'torture_pull_allnighter',
+        text: '硬扛到天亮，整理汇总',
+        emoji: '☕',
+        effects: { academic: 5, mental: -20, pressure: 15 },
+        nextScene: 'weekend_choice',
+      },
+      {
+        id: 'torture_quick_patch',
+        text: '临时拼凑一份“能看”的汇报',
+        emoji: '🧩',
+        effects: { advisor: -5, mental: -10, pressure: 10 },
+        nextScene: 'weekend_choice',
+      },
+      {
+        id: 'torture_ignore',
+        text: '假装没看到，先睡',
+        emoji: '🙈',
+        effects: { advisor: -20, pressure: 10 },
+        nextScene: 'weekend_choice',
+      },
+    ],
+  },
+
+  // ========== 折磨版：实验室事故 ==========
+  lab_incident: {
+    id: 'lab_incident',
+    title: '实验室事故',
+    description: '你们组的服务器崩了，导师在群里点名要一个人负责。\n\n你知道不是你，但导师已经暗示“先有人出来扛”。',
+    emoji: '🧯',
+    background: 'bg-lab',
+    choices: [
+      {
+        id: 'incident_take_blame',
+        text: '认下责任，先稳住场面',
+        emoji: '😶',
+        effects: { advisor: 10, mental: -20, pressure: 15 },
+        nextScene: 'internship_choice',
+      },
+      {
+        id: 'incident_fight',
+        text: '据理力争，要求查日志',
+        emoji: '📑',
+        effects: { advisor: -20, peer_relations: -10, pressure: 10 },
+        nextScene: 'internship_choice',
+      },
+      {
+        id: 'incident_shift',
+        text: '私下协调，推给运维/师兄',
+        emoji: '🌀',
+        effects: { peer_relations: -15, mental: -10, pressure: 10 },
+        nextScene: 'internship_choice',
       },
     ],
   },
@@ -719,6 +822,13 @@ export const scenes: Record<string, Scene> = {
         effects: { mental: 15, academic: -15 },
         nextScene: 'internship_choice',
       },
+      {
+        id: 'blame_self',
+        text: '主动背锅，承认是自己疏忽',
+        emoji: '😶',
+        effects: { advisor: 5, mental: -20, peer_relations: -5 },
+        nextScene: 'internship_choice',
+      },
     ],
   },
 
@@ -919,6 +1029,44 @@ export const scenes: Record<string, Scene> = {
     background: 'bg-dorm',
     isEnd: true,
     endingType: 'dropout',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
+  ending_burnout: {
+    id: 'ending_burnout',
+    title: '精神崩溃',
+    description: '持续的高压把你彻底耗空。\n\n你开始失眠、记忆断片、对一切都失去兴趣。\n\n最终，你不得不停下，去修复被压垮的自己。\n\n🫥 精神崩溃',
+    emoji: '🫥',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'burnout',
+    choices: [
+      {
+        id: 'restart',
+        text: '重新开始',
+        emoji: '🔄',
+        effects: {},
+        nextScene: 'welcome',
+      },
+    ],
+  },
+
+  ending_kicked: {
+    id: 'ending_kicked',
+    title: '绩效清退',
+    description: '多次绩效预警后，你被要求退出课题组。\n\n没有人会为你的缺口买单，系统只看指标。\n\n这不是终点，但它确实是一个沉重的落点。\n\n🧾 绩效清退',
+    emoji: '🧾',
+    background: 'bg-dorm',
+    isEnd: true,
+    endingType: 'kicked',
     choices: [
       {
         id: 'restart',

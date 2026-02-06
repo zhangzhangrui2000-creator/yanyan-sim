@@ -8,6 +8,9 @@ const INITIAL_ATTRIBUTES: Attributes = {
   advisor: 50,
   money: 50,
   peer_relations: 50,
+  pressure: 30,
+  advisor_mood: 60,
+  sleep_debt: 20,
 };
 
 const INITIAL_PROGRESS: Progress = {
@@ -15,6 +18,7 @@ const INITIAL_PROGRESS: Progress = {
   week: 1,
   day: 1,
   scene: 'welcome',
+  kpiWarnings: 0,
 };
 
 export const useGameStore = create<GameState>()(
@@ -27,9 +31,11 @@ export const useGameStore = create<GameState>()(
       isPlaying: false,
       isCharacterCreated: false,
       history: [],
+      mode: 'normal',
 
       // 创建角色
       createCharacter: (character: Character) => {
+        const isTorture = get().mode === 'torture';
         // 根据背景调整初始属性
         let attrModifiers: Partial<Attributes> = {};
         
@@ -84,9 +90,18 @@ export const useGameStore = create<GameState>()(
             break;
         }
 
+        const baseAttributes = { ...INITIAL_ATTRIBUTES, ...attrModifiers };
+
         set({
           character,
-          attributes: { ...INITIAL_ATTRIBUTES, ...attrModifiers },
+          attributes: isTorture
+            ? {
+                ...baseAttributes,
+                mental: Math.max(0, baseAttributes.mental - 10),
+                money: Math.max(0, baseAttributes.money - 10),
+                pressure: 50,
+              }
+            : baseAttributes,
           isCharacterCreated: true,
           progress: { ...INITIAL_PROGRESS, scene: 'first_day' },
           history: [`创建了角色：${character.name}`],
@@ -96,6 +111,7 @@ export const useGameStore = create<GameState>()(
       // 做出选择
       makeChoice: (choice: Choice) => {
         const state = get();
+        const isTorture = state.mode === 'torture';
         const newAttributes = { ...state.attributes };
         
         // 应用效果
@@ -119,10 +135,93 @@ export const useGameStore = create<GameState>()(
         
         newProgress.scene = choice.nextScene;
 
+        if (isTorture) {
+          const allNighterChoices = new Set([
+            'stay_up',
+            'all_nighter',
+            'torture_pull_allnighter',
+            'torture_run_back',
+          ]);
+          const restChoices = new Set([
+            'go_sleep',
+            'sleep_weekend',
+            'take_break',
+          ]);
+          const backfireChoices = new Set([
+            'ask_exception',
+            'ask_advisor_help',
+            'ask_advisor',
+            'complain_advisor',
+            'report_rules',
+            'incident_fight',
+          ]);
+
+          // 全局折磨惩罚
+          newAttributes.mental = Math.max(0, Math.min(100, newAttributes.mental - 5));
+          newAttributes.money = Math.max(0, Math.min(100, newAttributes.money - 2));
+          newAttributes.advisor = Math.max(0, Math.min(100, newAttributes.advisor - 2));
+          newAttributes.pressure = Math.max(0, Math.min(100, newAttributes.pressure + 8));
+
+          if (allNighterChoices.has(choice.id)) {
+            newAttributes.sleep_debt = Math.max(0, Math.min(100, newAttributes.sleep_debt + 25));
+            newAttributes.mental = Math.max(0, Math.min(100, newAttributes.mental - 10));
+            newAttributes.pressure = Math.max(0, Math.min(100, newAttributes.pressure + 10));
+          } else if (restChoices.has(choice.id)) {
+            newAttributes.sleep_debt = Math.max(0, Math.min(100, newAttributes.sleep_debt - 20));
+            newAttributes.mental = Math.max(0, Math.min(100, newAttributes.mental + 5));
+          } else {
+            newAttributes.sleep_debt = Math.max(0, Math.min(100, newAttributes.sleep_debt + 5));
+          }
+
+          if (backfireChoices.has(choice.id)) {
+            newAttributes.advisor_mood = Math.max(0, Math.min(100, newAttributes.advisor_mood - 15));
+            newAttributes.advisor = Math.max(0, Math.min(100, newAttributes.advisor - 5));
+            newAttributes.pressure = Math.max(0, Math.min(100, newAttributes.pressure + 8));
+          }
+
+          if (newAttributes.academic < 50) {
+            newAttributes.advisor_mood = Math.max(0, Math.min(100, newAttributes.advisor_mood - 3));
+          }
+          if (newAttributes.pressure > 70) {
+            newAttributes.advisor_mood = Math.max(0, Math.min(100, newAttributes.advisor_mood - 4));
+          }
+
+          // 周度绩效检查
+          if (newProgress.day % 7 === 0) {
+            const warningTriggered =
+              newAttributes.academic < 50 || newAttributes.advisor < 40 || newAttributes.pressure > 70;
+            if (warningTriggered) {
+              newProgress.kpiWarnings += 1;
+              newAttributes.mental = Math.max(0, Math.min(100, newAttributes.mental - 5));
+              newAttributes.advisor = Math.max(0, Math.min(100, newAttributes.advisor - 5));
+            }
+            newAttributes.pressure = Math.max(0, Math.min(100, newAttributes.pressure + 10));
+          }
+
+          // 折磨版插入场景
+          if (state.progress.scene === 'strict_attendance' && choice.nextScene === 'daily_routine_1') {
+            newProgress.scene = 'torture_checkin';
+          }
+          if (state.progress.scene === 'experiment_1' && choice.nextScene === 'weekend_choice') {
+            newProgress.scene = 'torture_midnight';
+          }
+          if (state.progress.scene === 'crisis' && choice.nextScene === 'internship_choice') {
+            newProgress.scene = 'lab_incident';
+          }
+        }
+
         // 检查游戏结束条件
         let finalScene = choice.nextScene;
         if (newAttributes.mental <= 0) {
           finalScene = 'ending_dropout_mental';
+        } else if (newAttributes.pressure >= 100) {
+          finalScene = 'ending_burnout';
+        } else if (newAttributes.sleep_debt >= 100) {
+          finalScene = 'ending_burnout';
+        } else if (newAttributes.advisor_mood <= 0) {
+          finalScene = 'ending_kicked';
+        } else if (newProgress.kpiWarnings >= 3) {
+          finalScene = 'ending_kicked';
         } else if (newProgress.semester > 6 && newAttributes.academic < 60) {
           finalScene = 'ending_delay';
         } else if (newProgress.semester > 6 && newAttributes.academic >= 80) {
@@ -152,6 +251,10 @@ export const useGameStore = create<GameState>()(
         });
       },
 
+      setMode: (mode) => {
+        set({ mode });
+      },
+
       // 获取属性颜色
       getAttributeColor: (value: number) => {
         if (value >= 70) return 'bg-green-500';
@@ -167,6 +270,9 @@ export const useGameStore = create<GameState>()(
           advisor: '导师关系',
           money: '经济状况',
           peer_relations: '同门关系',
+          pressure: '绩效压力',
+          advisor_mood: '导师情绪',
+          sleep_debt: '睡眠负债',
         };
         return labels[key];
       },

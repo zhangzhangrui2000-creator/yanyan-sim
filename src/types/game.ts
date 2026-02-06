@@ -6,6 +6,9 @@ export interface Attributes {
   advisor: number;       // 导师关系
   money: number;         // 经济状况
   peer_relations: number; // 同门关系
+  pressure: number;      // 绩效压力
+  advisor_mood: number;  // 导师情绪
+  sleep_debt: number;    // 睡眠负债
 }
 
 export interface Character {
@@ -21,6 +24,7 @@ export interface Progress {
   week: number;        // 当前周 (1-20)
   day: number;         // 总天数
   scene: string;       // 当前场景ID
+  kpiWarnings: number; // 绩效预警次数
 }
 
 export interface Choice {
@@ -40,8 +44,10 @@ export interface Scene {
   background?: string;
   choices: Choice[];
   isEnd?: boolean;
-  endingType?: 'graduation' | 'dropout' | 'delay' | 'excellent' | 'withdrawal';
+  endingType?: 'graduation' | 'dropout' | 'delay' | 'excellent' | 'withdrawal' | 'burnout' | 'kicked';
 }
+
+export type GameMode = 'normal' | 'torture';
 
 export interface GameState {
   // 角色属性
@@ -57,11 +63,13 @@ export interface GameState {
   isPlaying: boolean;
   isCharacterCreated: boolean;
   history: string[];  // 历史记录
+  mode: GameMode;
   
   // 动作
   createCharacter: (character: Character) => void;
   makeChoice: (choice: Choice) => void;
   resetGame: () => void;
+  setMode: (mode: GameMode) => void;
   getAttributeColor: (value: number) => string;
   getAttributeLabel: (key: keyof Attributes) => string;
 }

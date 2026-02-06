@@ -5,20 +5,32 @@ interface AttributeBarProps {
   label: string;
   value: number;
   emoji?: string;
+  dangerHigh?: boolean;
 }
 
 export const AttributeBar: React.FC<AttributeBarProps> = ({
   label,
   value,
   emoji,
+  dangerHigh = false,
 }) => {
   const getColor = (v: number) => {
+    if (dangerHigh) {
+      if (v >= 70) return 'bg-red-500';
+      if (v >= 40) return 'bg-yellow-500';
+      return 'bg-green-500';
+    }
     if (v >= 70) return 'bg-green-500';
     if (v >= 40) return 'bg-yellow-500';
     return 'bg-red-500';
   };
 
   const getTextColor = (v: number) => {
+    if (dangerHigh) {
+      if (v >= 70) return 'text-red-700';
+      if (v >= 40) return 'text-yellow-700';
+      return 'text-green-700';
+    }
     if (v >= 70) return 'text-green-700';
     if (v >= 40) return 'text-yellow-700';
     return 'text-red-700';

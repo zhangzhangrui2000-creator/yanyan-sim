@@ -7,6 +7,7 @@ import { BACKGROUNDS, MAJORS, ADVISOR_TYPES } from '@/types/game';
 
 export const CharacterCreation: React.FC = () => {
   const createCharacter = useGameStore(state => state.createCharacter);
+  const setMode = useGameStore(state => state.setMode);
   
   const [step, setStep] = useState(1);
   const hasSubmittedRef = useRef(false);
@@ -17,6 +18,7 @@ export const CharacterCreation: React.FC = () => {
     major: '',
     advisorType: '',
   });
+  const [mode, setLocalMode] = useState<'normal' | 'torture' | ''>('');
 
   const submitCharacter = useCallback(() => {
     if (hasSubmittedRef.current) {
@@ -29,15 +31,16 @@ export const CharacterCreation: React.FC = () => {
       : ['小红', '婷婷', '雨萱', '思琪', '梦洁'];
     const randomName = names[Math.floor(Math.random() * names.length)];
     
+    setMode(mode === '' ? 'normal' : mode);
     createCharacter({
       ...character,
       name: randomName,
       gender: character.gender as 'male' | 'female',
     });
-  }, [character, createCharacter]);
+  }, [character, createCharacter, mode, setMode]);
 
   const handleNext = () => {
-    if (step < 4) {
+    if (step < 5) {
       setStep(step + 1);
     } else {
       submitCharacter();
@@ -54,6 +57,8 @@ export const CharacterCreation: React.FC = () => {
         return character.major !== '';
       case 4:
         return character.advisorType !== '';
+      case 5:
+        return mode !== '';
       default:
         return false;
     }
@@ -73,7 +78,7 @@ export const CharacterCreation: React.FC = () => {
       return;
     }
     if (step === 4 && character.advisorType) {
-      submitCharacter();
+      setStep(5);
     }
   }, [
     step,
@@ -185,6 +190,35 @@ export const CharacterCreation: React.FC = () => {
             </div>
           </div>
         );
+
+      case 5:
+        return (
+          <div>
+            <h3 className="text-sm font-bold mb-4">选择模式：</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setLocalMode('normal')}
+                className={`win95-btn p-3 text-left ${mode === 'normal' ? 'win95-btn-active' : ''}`}
+              >
+                <span className="text-lg mr-2">🙂</span>
+                <span className="font-bold text-sm">标准版</span>
+                <p className="text-xs text-gray-600 mt-1">常规压力，体验完整流程</p>
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setLocalMode('torture')}
+                className={`win95-btn p-3 text-left ${mode === 'torture' ? 'win95-btn-active' : ''}`}
+              >
+                <span className="text-lg mr-2">🧨</span>
+                <span className="font-bold text-sm">折磨版</span>
+                <p className="text-xs text-gray-600 mt-1">导师情绪+睡眠负债+反噬选项</p>
+              </motion.button>
+            </div>
+          </div>
+        );
       
       default:
         return null;
@@ -210,7 +244,7 @@ export const CharacterCreation: React.FC = () => {
 
         {/* 进度指示器 */}
         <div className="flex gap-1 mb-4">
-          {[1, 2, 3, 4].map((s) => (
+          {[1, 2, 3, 4, 5].map((s) => (
             <div
               key={s}
               className={`flex-1 h-2 ${
@@ -241,9 +275,9 @@ export const CharacterCreation: React.FC = () => {
             onClick={handleNext}
             disabled={!isStepComplete()}
             variant="primary"
-            emoji={step === 4 ? '✓' : '▶'}
+            emoji={step === 5 ? '✓' : '▶'}
           >
-            {step === 4 ? '完成注册' : '下一步'}
+            {step === 5 ? '完成注册' : '下一步'}
           </Win95Button>
         </div>
       </div>
