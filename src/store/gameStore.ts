@@ -526,7 +526,3 @@ export const useGameStore = create<GameState>()(
     }
   )
 );
-          if (state.progress.scene === 'sickness_event' && chainReturnScene) {
-            newProgress.scene = chainReturnScene;
-            chainReturnScene = null;
-          }
